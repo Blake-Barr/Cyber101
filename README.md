@@ -32,3 +32,7 @@ Responsible for front line IT support
 Responsible for handling access and policies 
 Responsible for maintaining user directory 
 Responsible for creating phishing structure 
+
+## Wireframe
+![Wireframe](https://user-images.githubusercontent.com/59884862/189560279-a0327ce4-e8c7-4ad1-a39d-7fc87093875c.PNG)
+
