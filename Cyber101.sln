@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyber101", "Cyber101\Cyber101.csproj", "{9C66B55F-87E0-4FDC-9AEB-253DDE9B3C4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C66B55F-87E0-4FDC-9AEB-253DDE9B3C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C66B55F-87E0-4FDC-9AEB-253DDE9B3C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C66B55F-87E0-4FDC-9AEB-253DDE9B3C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C66B55F-87E0-4FDC-9AEB-253DDE9B3C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43DF532A-FC17-4725-8127-CEA5FF405DB0}
+	EndGlobalSection
+EndGlobal
