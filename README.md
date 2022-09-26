@@ -9,37 +9,50 @@ Our project was inspired by our experience in the workforce. While working in ou
 ### Software Developer: Blake Barr 
 
 Responsible for technical architecture 
+
 Responsible for setup and maintenance of server environment 
+
 Responsible for software development 
 
 ### Designer: Ryan Day 
 
 Responsible for creating the structure and layout of the site
+
 Responsible for implementing features and additions	
+
 Responsible for testing and troubleshooting site features
+
 Assisting in software development
 
 
 ### Research: Matthew Johnson 
 
 Responsible for data input
+
 Responsible for information gathering
+
 Source Citations
+
 Design of presentation work
+
 Assisting in software development
 
 
 ### UI & UX Experience: Josh Woodson 
 
 Responsible for Optimizing User Interface
+
 Responsible for Optimizing User experience to make being cyber smart easy to learn and understand 
+
 Assisting in software development
 
 
 ### QA: Isaiah Shim 
 
 Assists in testing application
+
 Identifying issues within the site, and research ways to fix these issues
+
 Assisting in software development
 
 
