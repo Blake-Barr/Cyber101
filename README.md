@@ -60,3 +60,6 @@ Assisting in software development
 ![Wireframe](https://user-images.githubusercontent.com/59884862/189560279-a0327ce4-e8c7-4ad1-a39d-7fc87093875c.PNG)
 *Wireframe has an older project name attached to it
 
+![WatchfulEye - Homepage (NEW USER) (WIREFRAME)](https://user-images.githubusercontent.com/59884862/192378092-64e0bd55-33b3-4001-8223-b3fc73fd31fb.png)
+
+
