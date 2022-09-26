@@ -12,26 +12,36 @@ Responsible for technical architecture
 Responsible for setup and maintenance of server environment 
 Responsible for software development 
 
-### Security Analyst: Ryan Day 
+### Designer: Ryan Day 
 
-Responsible for analyzing and implementing security measures 
-Responsible for monitoring network security issues 
-Responsible for penetration testing 
+Responsible for creating the structure and layout of the site
+Responsible for implementing features and additions	
+Responsible for testing and troubleshooting site features
+Assisting in software development
+
 
 ### Research: Matthew Johnson 
 
-Responsible for data input 
-Responsible for information gathering 
+Responsible for data input
+Responsible for information gathering
+Source Citations
+Design of presentation work
+Assisting in software development
 
-### Front End Support: Josh Woodson 
 
-Responsible for front line IT support 
+### UI & UX Experience: Josh Woodson 
 
-### System Administrator: Isaiah Shim 
+Responsible for Optimizing User Interface
+Responsible for Optimizing User experience to make being cyber smart easy to learn and understand 
+Assisting in software development
 
-Responsible for handling access and policies 
-Responsible for maintaining user directory 
-Responsible for creating phishing structure 
+
+### QA: Isaiah Shim 
+
+Assists in testing application
+Identifying issues within the site, and research ways to fix these issues
+Assisting in software development
+
 
 ## Wireframe
 ![Wireframe](https://user-images.githubusercontent.com/59884862/189560279-a0327ce4-e8c7-4ad1-a39d-7fc87093875c.PNG)
