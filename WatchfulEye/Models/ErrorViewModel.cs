@@ -1,4 +1,4 @@
-namespace Cyber101.Models
+namespace WatchfulEye.Models
 {
     public class ErrorViewModel
     {
