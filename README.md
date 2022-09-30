@@ -62,4 +62,5 @@ Assisting in software development
 
 ![WatchfulEye - Homepage (NEW USER) (WIREFRAME)](https://user-images.githubusercontent.com/59884862/192378092-64e0bd55-33b3-4001-8223-b3fc73fd31fb.png)
 
+![WatchfulEye - Home Wireframe (NEWEST)](https://user-images.githubusercontent.com/59884862/193364025-c521c737-ac0c-4376-8347-5c1831fb4bfb.png)
 
