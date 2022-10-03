@@ -30,6 +30,12 @@ body {
     color: white;
 }
 
+.navContent2 {
+    /*background-color: #0F084B;*/
+    background-color: #192a5c;
+    color: white;
+}
+
 .navLink    {
     color:white
 }
@@ -40,4 +46,20 @@ body {
 
 .footerContent {
     background-color: #26408B;
+}
+
+#WE_Nav {
+    float:left;
+    background: aliceblue;
+}
+
+#WE_NavigationList  {
+    list-style-type: none;
+}
+
+.WE_Section {
+    background: white;
+    color: black;
+    padding: 10px;
+    margin-top: 25px;
 }
