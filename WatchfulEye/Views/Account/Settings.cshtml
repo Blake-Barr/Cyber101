@@ -3,5 +3,53 @@
     ViewData["Title"] = "Settings";
 }
 
-<h1>Settings</h1>
+<script>
+    function pwSettingsClicked()    {
+        document.getElementById('WE_passwordFields').classList.remove("visually-hidden");
+        document.getElementById('pwSettingsButton').classList.add("visually-hidden");
+    }
+</script>
+
+<h1>Account Settings</h1>
+
+<form id="WE_AccountLoggedInSettingsForm" class="WE_Form" method="post" action="">
+    <div id="WE_AccountFields" class="WE_Section">
+        <div class="WE_FormField">
+            <p>Username</p>
+            <input type="text" name="Username" value="" /><br />
+        </div>
+
+        <div class="WE_FormField">
+            <p>Display Name</p>
+            <input type="text" name="DisplayName" value="" /><br />
+        </div>
+
+        <div class="WE_FormField">
+            <p>Email</p>
+            <input type="text" name="Email" value="" /><br />
+        </div>
+
+        <div class="WE_FormField">
+            <button id="pwSettingsButton" type="button" onclick="pwSettingsClicked()">Password Settings</button>
+        </div>
+
+        <div id="WE_passwordFields" class="visually-hidden">
+            <div class="WE_FormField">
+                <p>Old Password</p>
+                <input type="text" name="OldPassword" value="" /><br />
+            </div>
+            <div class="WE_FormField">
+                <p>New Password</p>
+                <input type="text" name="NewPassword" value="" /><br />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="WE_Section">
+    <h2>Account Deactivation</h2>
+
+    <p>Deactivation Account Text</p>
+    <button id="AccountDeactivationButton" type="button" onclick="console.log('Not Implemented')">Deactivate Account</button>
+</div>
 

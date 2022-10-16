@@ -3,5 +3,50 @@
     ViewData["Title"] = "BruteForceTesting";
 }
 
-<h1>BruteForceTesting</h1>
+<h1>Brute Force Calculator</h1>
+
+<div id="WE_BruteForceSection" class="WE_Section WE_BruteForce">
+    <p>
+        Brute Force Attacks are a common form of cyber attack. A hacker will will attempt to guess your password using an algorithm that will iterate through as many combinations
+        as possible with the goal of eventually getting access to your account.
+    </p>
+    <p>
+        Different Brute Force Attack methods:
+    </p>
+    <ul>
+        <li>
+            Quickly testing combinations of random characters at increasing volumes.
+        </li>
+         <li>
+            Recycling combinations of usernames and passwords from other sources, and iterating through each of them at a rapid pace.
+        </li>
+        <li>
+            Iterating through a list of users and attempting a single common passphrase.
+        </li>
+    </ul>
+    <p>
+        Brute force attacks specialize in targeting users with passwords that are simple, common and reused. In order to counterract this attack, users should take advantage of the
+        following practices:
+    </p>
+    <ul>
+        <li>
+            Create passwords that use special characters, are of a substantial length, and do not include common phrases (like password, test, etc)
+        </li>
+        <li>
+            Take advantage of secondary authentication measures, such as 2-Factor-Authentication.
+        </li>
+         <li>
+            Avoiding the reuse of passwords to prevent an attacker from accessing anything else in the event of a successful breach.
+        </li>
+    </ul>
+</div>
+
+<div id="WE_BruteForceSection" class="WE_Section WE_BruteForce">
+    <p>Enter a phrase here. It will be run processed through a variety of brute force algortithms to test the complexity of the phrase.</p>
+    <input id="BruteForcePhrase" type="text" name="BruteForcePasscode" value="" /><br />
+</div>
+
+<div id="WE_Results" class="WE_Section WE_BruteForce">
+    Results go here
+</div>
 

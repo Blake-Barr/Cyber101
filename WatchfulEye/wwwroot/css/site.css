@@ -63,3 +63,32 @@ body {
     padding: 10px;
     margin-top: 25px;
 }
+
+.WE_Form .WE_Section{
+    display: flex;
+    flex-direction: column
+}
+
+.WE_Form div#WE_passwordFields {
+    display: flex;
+    flex-direction: column
+}
+.WE_Form p  {
+    width: 20%;
+    float: left;
+}
+
+.WE_Form .WE_FormField {
+    padding-top: 10px;
+    border-top: 2px solid #808080;
+}
+
+.WE_Form .WE_FormField:first-child {
+    padding-top:0;
+    border-top: none;
+}
+
+.WE_Form input {
+    float: right;
+    width: 75%;
+}
