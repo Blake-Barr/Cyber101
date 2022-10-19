@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WatchfulEye.Models;
 
 namespace WatchfulEye.Controllers
 {
@@ -12,6 +13,14 @@ namespace WatchfulEye.Controllers
         public IActionResult PhishingSimulator()
         {
             return View();
+        }
+
+        public string testEmail()
+        {
+            PhishingModel m = new PhishingModel();
+            m.testCreateEmail();
+
+            return "Sent";
         }
     }
 }
