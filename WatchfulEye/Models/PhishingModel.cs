@@ -27,5 +27,27 @@ namespace WatchfulEye.Models
 
             smtpClient.Send(mailMessage);
         }
+
+        public void sendEmail(EmailTemplate e, string address)
+        {
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("watchfuleyeapp@gmail.com", "pkuvxmbqhkaffant"),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress("watchfuleyeapp@gmail.com"),
+                Subject = e.header,
+                Body = e.HTML,
+                IsBodyHtml = true,
+            };
+
+            mailMessage.To.Add(address);
+
+            smtpClient.Send(mailMessage);
+        }
     }
 }

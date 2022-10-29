@@ -18,9 +18,9 @@ namespace WatchfulEye.Controllers
             return View();
         }
 
-        public IActionResult PhishingSimulator()
+        public async Task<IActionResult> PhishingSimulator()
         {
-            return View();
+            return View(await db.emailTemplates.ToListAsync());
         }
 
         public IActionResult PhishingSimulatorP2()
@@ -38,12 +38,16 @@ namespace WatchfulEye.Controllers
             return View(await db.emailTemplates.ToListAsync());
         }
 
-        public string testEmail()
+        [HttpPost]
+        public async Task<IActionResult> SendEmail([FromForm] int template, [FromForm] string emailAddress)
         {
-            PhishingModel m = new PhishingModel();
-            m.testCreateEmail();
+            var emailTemplate = await db.emailTemplates
+                .FirstOrDefaultAsync(m => m.ID == template);
 
-            return "Sent";
+            PhishingModel m = new PhishingModel();
+            m.sendEmail(emailTemplate, emailAddress);
+
+            return RedirectToAction(nameof(PhishingSimulator));
         }
     }
 }
