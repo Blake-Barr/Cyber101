@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "PhishingSimulator Level 2";
+}
+
+<script>
+    $(document).ready(function () {
+
+        $("ul#tree li ul").addClass("choices-collapsed");
+
+        $("#tree li input").click(function (event) {
+            $(event.target).parent().addClass("choice-selected");
+            $(event.target).nextAll().removeClass("choices-collapsed");
+            $(event.target).parent().nextAll().addClass("choices-collapsed");
+            $(event.target).parent().prevAll().addClass("choices-collapsed");
+        });
+        $("#goBack").click(function (event) { 
+            $('li.choice-selected:last').children("ul").addClass("choices-collapsed");
+            $('li.choice-selected:last').nextAll().removeClass("choices-collapsed");
+            $('li.choice-selected:last').prevAll().removeClass("choices-collapsed");
+            $('li.choice-selected:last').removeClass("choice-selected").children("input").prop("checked", false);
+        });
+        $("#reset").click(function (event) { 
+            $('#tree li').removeClass("choices-collapsed");
+            $('#tree li').removeClass("choice-selected");
+            $('#tree input').prop("checked", false);
+            $("ul#tree li ul").addClass("choices-collapsed");
+        });
+    });
+</script>
+
+<h1>Phishing</h1>
+
+<div class="WE_Section">
+Phishing Simulator Level 3
+</div>

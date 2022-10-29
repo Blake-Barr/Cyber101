@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewData["Title"] = "PhishingSimulator Level 2";
+}
+
+<script>
+    $(document).ready(function () {
+
+        $("ul#tree li ul").addClass("choices-collapsed");
+
+        $("#tree li input").click(function (event) {
+            $(event.target).parent().addClass("choice-selected");
+            $(event.target).nextAll().removeClass("choices-collapsed");
+            $(event.target).parent().nextAll().addClass("choices-collapsed");
+            $(event.target).parent().prevAll().addClass("choices-collapsed");
+        });
+        $("#goBack").click(function (event) { 
+            $('li.choice-selected:last').children("ul").addClass("choices-collapsed");
+            $('li.choice-selected:last').nextAll().removeClass("choices-collapsed");
+            $('li.choice-selected:last').prevAll().removeClass("choices-collapsed");
+            $('li.choice-selected:last').removeClass("choice-selected").children("input").prop("checked", false);
+        });
+        $("#reset").click(function (event) { 
+            $('#tree li').removeClass("choices-collapsed");
+            $('#tree li').removeClass("choice-selected");
+            $('#tree input').prop("checked", false);
+            $("ul#tree li ul").addClass("choices-collapsed");
+        });
+    });
+</script>
+
+<h1>Phishing</h1>
+
+<div class="WE_Section">
+<div id="tree-container">
+    <div id="q-container">
+        <ul id="tree">
+            <li>What is the caller's affiliation with the University?</li>
+            <li>
+                <input name="lvl1" type="radio" value="on">Student
+                <ul>
+                    <li>What type of student are they?</li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">They are an undergraduate student.
+                        <ul>
+                            <li>Is the student currently employed by the university?</li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">Yes, they are a current student employee.
+                                <ul>
+                                    <li class="answer">
+                                        <p>Undergraduate students who are currently student employees are eligible to use AwesomeSauce on any university-owned computer. Direct the student to talk to their supervisor about getting an AwesomeSauce account created for them. Their account will be active as long as they remain employed.</p>
+                                        <p>If their position through the university ends, they will still be able to purchase the non-Enterprise version of this software, GoodGravy. They can then transfer their account data from AwesomeSauce to GoodGravy.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">No, they are not employed by the university.
+                                <ul>
+                                    <li class="answer">Undergraduate students who are not employed by the university are not eligible to use AwesomeSauce. They may, however, purchase the non-Enterprise version of this software, GoodGravy, from the Campus Store.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">They are a graduate student.
+                        <ul>
+                            <li>Is the student enrolled in one of the following schools?</li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">School of Nursing
+                                <ul>
+                                    <li class="answer">Graduate students in the School of Nursing are not eligible to use AwesomeSauce, as the School of Nursing instead wants students to use their local software, InHouseDressing. Questions about the use of this software should be directed to the SoN helpdesk at 555-123-1234.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">School of Business
+                                <ul>
+                                    <li class="answer">Graduate students in the School of Business are eligible to use AwesomeSauce, however, they need to register their account under their <em>example</em> email address to gain access to additional features that were specifically licensed for the SoB.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">They are enrolled in a school other than the School of Nursing or School of Business
+                                <ul>
+                                    <li class="answer">Graduate students enrolled in any other School or College meet the normal criteria for AwesomeSauce eligibility; however, please note that graduate students may only install AwesomeSauce on a university-owned computer.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input name="lvl1" type="radio" value="on">Alumni
+                <ul>
+                    <li>When did they graduate from the university?</li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">They graduated after Spring 2014.
+                        <ul>
+                            <li class="answer">Alumni who graduated after Spring 2014 will be eligible to use AwesomeSauce, however, they will have access to a limited feature set.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">They graduated prior to Spring 2014.
+                        <ul>
+                            <li class="answer">Alumni who graduated before Spring 2014 will not be eligible to use AwesomeSauce, as they were students when the software was licensed for the university.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input name="lvl1" type="radio" value="on">Faculty or Staff
+                <ul>
+                    <li>Are they a full or part-time employee?</li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">They are a full-time employee.
+                        <ul>
+                            <li>What is their position type?</li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">They have a permanent position.
+                                <ul>
+                                    <li class="answer">As long as they remain an employee, they will be eligible to install and use AwesomeSauce on both personal and university-owned computers.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">They have a project position.
+                                <ul>
+                                    <li>Is their position renewable?</li>
+                                    <li>
+                                        <input name="lvl4" type="radio" value="on">Yes, their position is renewable.
+                                        <ul>
+                                            <li class="answer">As long as they remain an employee, they will be eligible to install and use AwesomeSauce on both personal and university-owned computers.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <input name="lvl4" type="radio" value="on">No, their position cannot be renewed.
+                                        <ul>
+                                            <li class="answer">As long as they remain an employee, they will be eligible to install and use AwesomeSauce on university-owned computers. For personal use, they can purchase a copy of the non-Enterprise version of the software, GoodGravy, from the Campus Store.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input name="lvl3" type="radio" value="on">They are a limited term position.
+                                <ul>
+                                    <li class="answer">Limited term employees are not eligible to use AwesomeSauce. They may, however, purchase the non-Enterprise version of this software, GoodGravy, from the Campus Store.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">They are a part-time employee.
+                        <ul>
+                            <li class="answer">As long as they remain an employee, they will be eligible to install and use AwesomeSauce on university-owned computers. For personal use, they can purchase a copy of the non-Enterprise version of the software, GoodGravy, from the Campus Store.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <input name="lvl1" type="radio" value="on">Former Faculty or Staff
+                <ul>
+                    <li>Do they have a special appointment from the university, i.e. are they designated as Emeritus or Special Population by their former HR department?</li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">Yes, they are listed Emeritus or Special Population.
+                        <ul>
+                            <li class="answer">For the duration of this designation, they will be eligible to install and use AwesomeSauce on both personal and university-owned computers.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input name="lvl2" type="radio" value="on">No, they are not Emeritus or Special Population.
+                        <ul>
+                            <li class="answer">Unfortunately, they will not be eligible to use AwesomeSauce, nor are they eligible to purchase GoodGravy through the Campus Store. If they are still interested in GoodGravy, let them know they can purchase the software directly from the vendor.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <button class="treeControls" id="goBack">Back</button> <button id="reset" class="treeControls">Reset</button>
+</div>
+
+    <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="PhishingSimulatorP3">Continue to Level 3</a>
+</div>

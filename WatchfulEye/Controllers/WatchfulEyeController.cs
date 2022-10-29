@@ -15,6 +15,16 @@ namespace WatchfulEye.Controllers
             return View();
         }
 
+        public IActionResult PhishingSimulatorP2()
+        {
+            return View();
+        }
+
+        public IActionResult PhishingSimulatorP3()
+        {
+            return View();
+        }
+
         public string testEmail()
         {
             PhishingModel m = new PhishingModel();
