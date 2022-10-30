@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "PhishingSimulator Level 2";
 }
 
@@ -14,13 +13,13 @@
             $(event.target).parent().nextAll().addClass("choices-collapsed");
             $(event.target).parent().prevAll().addClass("choices-collapsed");
         });
-        $("#goBack").click(function (event) { 
+        $("#goBack").click(function (event) {
             $('li.choice-selected:last').children("ul").addClass("choices-collapsed");
             $('li.choice-selected:last').nextAll().removeClass("choices-collapsed");
             $('li.choice-selected:last').prevAll().removeClass("choices-collapsed");
             $('li.choice-selected:last').removeClass("choice-selected").children("input").prop("checked", false);
         });
-        $("#reset").click(function (event) { 
+        $("#reset").click(function (event) {
             $('#tree li').removeClass("choices-collapsed");
             $('#tree li').removeClass("choice-selected");
             $('#tree input').prop("checked", false);
@@ -67,9 +66,9 @@
                 User First name,
                 <br />
                 <br />
-                 I have messed up big time. I forgot that I need to give the Finance department Scott Robberts information so they can start his payroll.
+                I have messed up big time. I forgot that I need to give the Finance department Scott Robberts information so they can start his payroll.
                 <br />
-                I don't have time to follow the procedures. If you help me with this I will make it up to you in the future. 
+                I don't have time to follow the procedures. If you help me with this I will make it up to you in the future.
             </li>
             <li>
                 <input name="lvl1" type="radio" value="on"> Replay back saying:
@@ -89,22 +88,22 @@
                         I really need to get this information turned in before the Finance team goes to lunch. This is very important and I know that I dropped the ball on this.
                         <br />
                         If I don't get this information over I will lose my job. You don't want me to lose my job over this mistake, do you?
-                        </li>
+                    </li>
                     <li>
-                        <input name="lvl2" type="radio" value="on"> Matt, 
+                        <input name="lvl2" type="radio" value="on"> Matt,
                         <br />
-                        This behavior is not common coming from you. I will be reporting this incident to managemnt. I will not be helpiing you. 
-                         <ul>
+                        This behavior is not common coming from you. I will be reporting this incident to managemnt. I will not be helpiing you.
+                        <ul>
 
-                            <li>
-                                Congrats! you didn't fall for the phishing attempt in this scnario. You will be able to move on to the next level. 
+                            <div>
+                                Congrats! you didn't fall for the phishing attempt in this scnario. You will be able to move on to the next level.
+                            </div>
 
-                            </li>
-                            <li>
+                            <div>
                                 <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="PhishingSimulatorP3">Continue to Level 3</a>
-                            </li>
-                           
+                            </div>
                         </ul>
+
                     </li>
                     <!--This is the Code for the second button -->
                     <li>
@@ -112,9 +111,9 @@
                         <br />
                         I do not want anyone to lose their job. I will be more than happy to help. I have attached the information you are seeking below. If there's anything else that needs to be done please let me know.
                         <ul>
-                            <li>
-                                You have given away senstive information to a scammer. Please hit the reset button to restart the scenario. 
-                           </li>                 
+                            <div>
+                                You have given away senstive information to a scammer. Please hit the reset button to restart the scenario.
+                            </div>
                         </ul>
                     </li>
                 </ul>
@@ -138,42 +137,42 @@
                         <br />
                         I really appreciate that you are willing to help me in this dire situation. You are the hero of the day. I will be able to keep my job now lol.
                         <br />
-                        I will list the information that the Finance team is requesting. You can just email me the information when you get it. Once again you have saved me from this disaster. 
+                        I will list the information that the Finance team is requesting. You can just email me the information when you get it. Once again you have saved me from this disaster.
                         <br />
                         Social Security number, Home of Record, Banking information, and Date of Birth
-                        </li>
+                    </li>
                     <li>
                         <input name="lvl2" type="radio" value="on"> Matt,
                         <br />
                         I am happy to be the hero in this disaster.  I have attached the information you are seeking below. If there's anything else that needs to be done please let me know.
                         <ul>
-                            <li>
+                            <div>
                                 You have given away senstive information to a scammer. Please hit the reset button to restart the scenario.
-                            </li>
+                            </div>
                         </ul>
                     </li>
-                    
+
 
                     <li>
                         <input name="lvl2" type="radio" value="on"> Matt,
                         <br />
-                        I do not want anyone to lose their job, but I won't be able to send you this information. I will have to deliver this on your behalf to make sure they receive the information and it's secure. 
+                        I do not want anyone to lose their job, but I won't be able to send you this information. I will have to deliver this on your behalf to make sure they receive the information and it's secure.
                         <ul>
-                            <li>
+                            <div>
                                 Congrats! you didn't fall for the phishing attempt in this scnario. You will be able to move on to the next level.
 
-                            </li>
-                            <li>
+                            </div>
+                            <div>
                                 <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="PhishingSimulatorP3">Continue to Level 3</a>
-                            </li>
+                            </div>
 
                     </li>
                 </ul>
             </li>
-           
+
         </ul>
     </div>
     <button class="treeControls" id="goBack">Back</button> <button id="reset" class="treeControls">Reset</button>
 </div>
 
-    <!--a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="PhishingSimulatorP3">Continue to Level 3</!--a>
+<!--a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="PhishingSimulatorP3">Continue to Level 3</!--a>
