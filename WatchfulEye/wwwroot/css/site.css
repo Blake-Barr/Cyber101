@@ -144,20 +144,20 @@ ul#tree li:last-child {
 /* styles selected choices */
 ul#tree li.choice-selected {
     font-style: italic;
-    background: #fff;
+    background: #0D0221;
     padding-bottom: 0px;
 }
 
 /* styles subquestion of selected choice */
 .choice-selected ul {
-    background: #efefef;
+    background: #0D0221;
     font-style: normal;
     margin-top: 20px;
     padding-top: 10px;
 }
 
     .choice-selected ul li {
-        background: #fff;
+        background: #0D0221;
         margin-left: -40px;
     }
 
