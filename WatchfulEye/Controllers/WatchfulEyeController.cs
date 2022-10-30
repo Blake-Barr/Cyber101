@@ -39,13 +39,13 @@ namespace WatchfulEye.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendEmail([FromForm] int template, [FromForm] string emailAddress)
+        public async Task<IActionResult> SendEmail([FromForm] int template, [FromForm] string emailAddress, [FromForm] string name)
         {
             var emailTemplate = await db.emailTemplates
                 .FirstOrDefaultAsync(m => m.ID == template);
 
             PhishingModel m = new PhishingModel();
-            m.sendEmail(emailTemplate, emailAddress);
+            m.sendEmail(emailTemplate, emailAddress, name);
 
             return RedirectToAction(nameof(PhishingSimulator));
         }

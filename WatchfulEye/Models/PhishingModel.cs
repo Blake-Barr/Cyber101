@@ -28,7 +28,11 @@ namespace WatchfulEye.Models
             smtpClient.Send(mailMessage);
         }
 
-        public void sendEmail(EmailTemplate e, string address)
+        /**
+         * !WEEmail! - Replace with target email
+         * !WELink! - Replace with link
+        **/
+        public void sendEmail(EmailTemplate e, string address, string name)
         {
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
@@ -37,11 +41,15 @@ namespace WatchfulEye.Models
                 EnableSsl = true,
             };
 
+            var emailhtml = e.HTML.Replace("!WEEmail!", address);
+            emailhtml = emailhtml.Replace("!WEName!", name);
+            emailhtml = emailhtml.Replace("!WELink!", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+
             var mailMessage = new MailMessage
             {
                 From = new MailAddress("watchfuleyeapp@gmail.com"),
                 Subject = e.header,
-                Body = e.HTML,
+                Body = emailhtml,
                 IsBodyHtml = true,
             };
 
