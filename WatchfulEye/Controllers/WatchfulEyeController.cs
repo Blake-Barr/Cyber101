@@ -49,5 +49,11 @@ namespace WatchfulEye.Controllers
 
             return RedirectToAction(nameof(PhishingSimulatorP3));
         }
+
+        // Test
+        public IActionResult ShadySiteExample()
+        {
+            return View();
+        }
     }
 }
