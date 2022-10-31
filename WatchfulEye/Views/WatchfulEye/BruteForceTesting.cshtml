@@ -74,7 +74,7 @@
         import urllib.request
 
         # Choose which characters to use in password guesses, or use dictionary
-        mode = dictionary
+        mode = "dictionary"
 
         #### Character lists to create passwords based on mode ####
         # Upper and lower case letters with numbers
@@ -170,7 +170,7 @@
             digits[index_counter] += 1
             digits_modded = "yes"
         
-         else:
+        else:
         # All combinations tried. Increase password length
         #  and reset counters
             password_length += 1
@@ -201,7 +201,7 @@
             print(current_letter)
         
         else:
-            status = "not found"
+            status = "not_found"
             print("DONE: " + current_letter)
             all_guesses += (guesses + 1)
             guesses = 0
@@ -269,10 +269,7 @@
             print(str(all_guesses / reps[1]) + " guesses per password")
             print(str(total_time / reps[1]) + " seconds per password")
             print(str(all_guesses / float(total_time)) + " guesses per second")
-
-
-       
-    </py-script>
+       </py-script>
     
 </div>
 
