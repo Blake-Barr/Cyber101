@@ -18,7 +18,7 @@ namespace WatchfulEye.Controllers
             return View();
         }
 
-        public async Task<IActionResult> PhishingSimulator()
+        public async Task<IActionResult> PhishingSimulatorP3()
         {
             return View(await db.emailTemplates.ToListAsync());
         }
@@ -28,7 +28,7 @@ namespace WatchfulEye.Controllers
             return View();
         }
 
-        public IActionResult PhishingSimulatorP3()
+        public IActionResult PhishingSimulator()
         {
             return View();
         }
