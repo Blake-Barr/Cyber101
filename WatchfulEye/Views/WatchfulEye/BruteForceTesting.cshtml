@@ -100,7 +100,7 @@
         "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", "q", "z"]
 
         # Load the word file into words_list array
-        with open("words.txt") as word_holder:
+        with open('/wwwroot/info/words.txt','r') as word_holder:
             words_list = json.load(word_holder)[0]
         print(len(words_list))
 
@@ -169,6 +169,7 @@
          if digits[index_counter] < (len(characters) - 1):
             digits[index_counter] += 1
             digits_modded = "yes"
+        
          else:
         # All combinations tried. Increase password length
         #  and reset counters
@@ -196,15 +197,15 @@
             if word_order.index(current_letter) < (len(word_order) - 1):
                 current_letter = word_order[word_order.index(current_letter) + 1]
         # Start from beginning of new letter section
-        current_letter_index = 0
-        print(current_letter)
+            current_letter_index = 0
+            print(current_letter)
         
         else:
         # All words from all letters tried, bad luck
             status = "not_found"
             print("DONE: " + current_letter)
-        all_guesses += (guesses + 1)
-        guesses = 0
+            all_guesses += (guesses + 1)
+            guesses = 0
 
         ### MAIN LOOP
         # Get the starting time to compare to end time for bulk runs  
