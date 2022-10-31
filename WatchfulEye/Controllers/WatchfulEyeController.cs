@@ -47,7 +47,7 @@ namespace WatchfulEye.Controllers
             PhishingModel m = new PhishingModel();
             m.sendEmail(emailTemplate, emailAddress, name);
 
-            return RedirectToAction(nameof(PhishingSimulator));
+            return RedirectToAction(nameof(PhishingSimulatorP3));
         }
     }
 }
