@@ -74,40 +74,40 @@
         import urllib.request
 
         # Choose which characters to use in password guesses, or use dictionary
-        mode = "dictionary" 
+        mode = dictionary
 
         #### Character lists to create passwords based on mode ####
         # Upper and lower case letters with numbers
         if mode == "string_full":
-            characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
-                          "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
-                          "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z", \
-                          "S", "A", "T", "C", "B", "D", "E", "F", "W", "G", "H", "I", \
-                          "L", "P", "R", "M", "U", "N", "O", "J", "K", "X", "V", "Y", \
-                          "Q", "Z"]
+         characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i",\
+        "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y",\
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z",\
+        "S", "A", "T", "C", "B", "D", "E", "F", "W", "G", "H", "I",\
+        "L", "P", "R", "M", "U", "N", "O", "J", "K", "X", "V", "Y",\
+        "Q", "Z"]
         # Lower case letters with numbers
         elif mode == "string_lower":
             characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
-                          "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
-                          "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z"]
-        # Numeric characters only for PIN-type passwords    
+        "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z"]
+        # Numeric characters only for PIN-type passwords
         elif mode == "numeric":
             characters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
         elif mode == "dictionary": # Single run only, no bulk passwords
-            # Try words starting with each letter in this order. These are all sections in the word list
-            word_order = ["common", "s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
-                          "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", "q", "z"]
-    
-            # Load the word file into words_list array
-            with open("\\info\\words.txt") as word_holder:
-                words_list = json.load(word_holder)[0]
-                print(len(words_list))
-        
-            # Currently trying words starting with this letter in word list    
-            current_letter = word_order[0]
-            # Index of current word withing its letter's section
-            current_letter_index = 0
+        # Try words starting with each letter in this order. These are all sections in the word list
+         word_order = ["common", "s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
+        "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", "q", "z"]
+
+        # Load the word file into words_list array
+        with open("words.txt") as word_holder:
+            words_list = json.load(word_holder)[0]
+        print(len(words_list))
+
+        # Currently trying words starting with this letter in word list
+        current_letter = word_order[0]
+        # Index of current word withing its letter's section
+        current_letter_index = 0
 
         # Number of guesses for current password
         guesses = 0
@@ -137,74 +137,74 @@
         # Create a brute-force password guess using the values from digits array
         def generate_brute_force():
             global target_password, current_guess, password_length, digits, status
-    
-            # Number of characters filled so far
-            char_count = 0
-            # Characters filled so far
-            current_guess = ""
-            # The current index in the digits array
-            index_counter = password_length
-    
-            # Create the guess according to current digits array    
-            while char_count < password_length:
-                char_count += 1
-                current_guess += characters[digits[char_count]]
 
-            # Incerement the relative key in the index array for next run
-            digits_modded = "no"
-            while digits_modded != "yes":
-                # Increment end index value if not equal to length of character array
-                if digits[index_counter] < (len(characters) - 1):
-                    digits[index_counter] += 1
-                    digits_modded = "yes"
+        # Number of characters filled so far
+        char_count = 0
+        # Characters filled so far
+        current_guess = ""
+        # The current index in the digits array
+        index_counter = password_length
 
-                # Otherwise move focus left if not already on first index in digits array    
-                else:
-                    if index_counter > 1:
-                        # Reset value fo existing index
-                        digits[index_counter] = 0
-                        # Move index left
-                        index_counter -= 1
-                        # Increment the value for the new index
-                        if digits[index_counter] < (len(characters) - 1):
-                            digits[index_counter] += 1
-                            digits_modded = "yes"
-                    else:
-                        # All combinations tried. Increase password length
-                        #  and reset counters
-                        password_length += 1
-                        for pos in digits:
-                            digits[pos] = 0                  
-                        digits_modded = "yes"
-                        print(status + ": " + current_guess)
+        # Create the guess according to current digits array
+        while char_count < password_length:
+            char_count += 1
+        current_guess += characters[digits[char_count]]
+
+        # Incerement the relative key in the index array for next run
+        digits_modded = "no"
+        while digits_modded != "yes":
+        # Increment end index value if not equal to length of character array
+            if digits[index_counter] < (len(characters) - 1):
+                digits[index_counter] += 1
+                digits_modded = "yes"
+
+        # Otherwise move focus left if not already on first index in digits array
+        else:
+         if index_counter > 1:
+        # Reset value fo existing index
+            digits[index_counter] = 0
+             # Move index left
+         index_counter -= 1
+            # Increment the value for the new index
+         if digits[index_counter] < (len(characters) - 1):
+            digits[index_counter] += 1
+            digits_modded = "yes"
+         else:
+        # All combinations tried. Increase password length
+        #  and reset counters
+            password_length += 1
+            for pos in digits:
+                digits[pos] = 0
+                digits_modded = "yes"
+                print(status + ": " + current_guess)
 
                 
         # Select a password guess from the word list
         def generate_dictionary_word():
             global target_password, current_guess, status, current_letter, current_letter_index, guesses, all_guesses
-            # Retrieve current word from word list array
-            if len(words_list[current_letter]) > 0:
-                current_guess = words_list[current_letter][current_letter_index]
-            # Prepare for next guess
-            # Move to next index in the current letter array if not at end
-            if current_letter_index < (len(words_list[current_letter]) - 1):
-                current_letter_index += 1
+        # Retrieve current word from word list array
+        if len(words_list[current_letter]) > 0:
+            current_guess = words_list[current_letter][current_letter_index]
+        # Prepare for next guess
+        # Move to next index in the current letter array if not at end
+        if current_letter_index < (len(words_list[current_letter]) - 1):
+            current_letter_index += 1
 
-            # If all words from that letter were tried    
-            else:
-                # Change to the next letter if any remaining
-                if word_order.index(current_letter) < (len(word_order) - 1):
-                    current_letter = word_order[word_order.index(current_letter) + 1]
-                    # Start from beginning of new letter section
-                    current_letter_index = 0
-                    print(current_letter)
-            
-                else:
-                    #All words from all letters tried, bad luck
-                    status = "not_found"
-                    print("DONE: " + current_letter)
-                    all_guesses += (guesses + 1)
-                    guesses = 0
+        # If all words from that letter were tried
+        else:
+        # Change to the next letter if any remaining
+            if word_order.index(current_letter) < (len(word_order) - 1):
+                current_letter = word_order[word_order.index(current_letter) + 1]
+        # Start from beginning of new letter section
+        current_letter_index = 0
+        print(current_letter)
+        
+        else:
+        # All words from all letters tried, bad luck
+            status = "not_found"
+            print("DONE: " + current_letter)
+        all_guesses += (guesses + 1)
+        guesses = 0
 
         ### MAIN LOOP
         # Get the starting time to compare to end time for bulk runs  
