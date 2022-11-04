@@ -44,6 +44,7 @@ namespace WatchfulEye.Models
             var emailhtml = e.HTML.Replace("!WEEmail!", address);
             emailhtml = emailhtml.Replace("!WEName!", name);
             emailhtml = emailhtml.Replace("!WELink!", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            emailhtml = emailhtml.Replace("!WESite!", "https://localhost:7128/WatchfulEye/ShadySiteExample");
 
             var mailMessage = new MailMessage
             {

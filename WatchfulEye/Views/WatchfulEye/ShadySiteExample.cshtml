@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "";
+}
+
+<h1>Shady site dot gov dot net dot org copyright 1992</h1>
+
+<h2>We need your password right now enter it here</h2>
+
+<textarea name="atrick" id="WE_BadInput"></textarea>
+
+<div id="WE_Warning" style="display:none;">
+    <p><b>STOP!</b> You have fallen for a malicious site! Please <a href="https://localhost:7128/WatchfulEye/PhishingSimulator">Click Here</a> to go to the WatchfulEye Phishing Simulation page.</p>
+</div>
+
+<script>
+    document.getElementById('WE_BadInput').onclick = function (e) {
+        console.log("They clicked");
+        document.getElementById('WE_Warning').style = "display: block;";
+        document.getElementById('WE_BadInput').disabled = true;
+    };
+</script>
