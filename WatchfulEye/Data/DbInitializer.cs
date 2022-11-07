@@ -8,12 +8,25 @@ namespace WatchfulEye.Data
     {
         public static void Initialize(WatchfulEyeContext cx)
         {
-            if(cx.emailTemplates.Any())
+
+            //cx.Database.EnsureDeleted();
+
+            //cx.Database.Migrate();
+
+            if (cx.emailTemplates.Any())
             {
-                //foreach (var entity in cx.emailTemplates)
-                    //cx.emailTemplates.Remove(entity);
-                //cx.SaveChanges();
-                return;
+                foreach (var entity in cx.emailTemplates)
+                    cx.emailTemplates.Remove(entity);
+                cx.SaveChanges();
+                //return;
+            }
+
+            if (cx.fakeSites.Any())
+            {
+                foreach (var entity in cx.fakeSites)
+                    cx.fakeSites.Remove(entity);
+                cx.SaveChanges();
+                //return;
             }
 
             var emails = new EmailTemplate[]
@@ -25,7 +38,12 @@ namespace WatchfulEye.Data
                 new EmailTemplate{difficultyLevel=0,name="Shady Site Template Example",HTML="<h1>Hello !WEName!</h1> <h2>You should click <a href='!WESite!'>this malicious link</a> and give us your information</h2>",header="Look at this! it is important!!!"},
             };
 
+            var sites = new FakeSite[]
+            {
+                new FakeSite{HTML="<html><style>h1  {color: red;}</style><body><h1>This is a test.</h1><p id='WE_SpotGameClue'>this is a bad thing!</p></body></html>",fakeURL="www.fake.com"}
+            };
             cx.emailTemplates.AddRange(emails);
+            cx.fakeSites.AddRange(sites);
             cx.SaveChanges();
         }
     }

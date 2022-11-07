@@ -17,10 +17,12 @@ namespace WatchfulEye.Data
         }
 
         public DbSet<EmailTemplate> emailTemplates { get; set; }
+        public DbSet<FakeSite> fakeSites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EmailTemplate>().ToTable("Email");
+            modelBuilder.Entity<FakeSite>().ToTable("FakeSite");
         }
     }
 }

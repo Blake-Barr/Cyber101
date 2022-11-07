@@ -1,0 +1,27 @@
+﻿@model WatchfulEye.Models.FakeSite
+@{
+    Layout = "";
+}
+<div class="WE_SpotGameTimer"></div>
+<script>
+    const timerElement = document.querySelector('.WE_SpotGameTimer');
+
+    let time = 300;
+
+    var countD = setInterval (()=>{
+        time--;
+        var min = Math.floor(time / 60);
+        var sec = Math.floor(time % 60);
+        timerElement.innerHTML = `${min<10 ? '0' : ''}${min}:${sec<10?'0':''}${sec}`;
+
+        if(time <= 0 || time < 1)   {
+            timerElement.innerHTML = "Fail";
+            clearInterval(countD);
+        }
+    }, 1000);
+</script>
+@{
+    @Html.Raw(Model.HTML)
+}
+
+

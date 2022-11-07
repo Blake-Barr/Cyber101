@@ -23,6 +23,11 @@ namespace WatchfulEye.Controllers
             return View(await db.emailTemplates.ToListAsync());
         }
 
+        public IActionResult PhishingSimulatorP4()
+        {
+            return View();
+        }
+
         public IActionResult PhishingSimulatorP2()
         {
             return View();
