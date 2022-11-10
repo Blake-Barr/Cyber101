@@ -9,9 +9,9 @@ namespace WatchfulEye.Data
         public static void Initialize(WatchfulEyeContext cx)
         {
 
-            //cx.Database.EnsureDeleted();
+            cx.Database.EnsureDeleted();
 
-            //cx.Database.Migrate();
+            cx.Database.Migrate();
 
             if (cx.emailTemplates.Any())
             {

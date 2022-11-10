@@ -11,8 +11,8 @@ using WatchfulEye.Data;
 namespace WatchfulEye.Migrations
 {
     [DbContext(typeof(WatchfulEyeContext))]
-    [Migration("20221106223520_initial")]
-    partial class initial
+    [Migration("20221110171623_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

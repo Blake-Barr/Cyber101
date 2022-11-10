@@ -11,65 +11,130 @@
       import time
       import json
 
-        # Choose which characters to use in password guesses, or use dictionary
-      mode = "string_full"
+      def test_password():
+          # Choose which characters to use in password guesses, or use dictionary
+          mode = "dictionary"
 
-        #### Character lists to create passwords based on mode ####
-        # Upper and lower case letters with numbers
-      if mode == "string_full":
-       characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
-                     "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
-                     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z", \
-                     "S", "A", "T", "C", "B", "D", "E", "F", "W", "G", "H", "I", \
-                     "L", "P", "R", "M", "U", "N", "O", "J", "K", "X", "V", "Y", \
-                     "Q", "Z"]
-        # Lower case letters with numbers
-      elif mode == "string_lower":
-       characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
-                     "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
-                     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z"]
-        # Numeric characters only for PIN-type passwords
-      elif mode == "numeric":
-       characters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            #### Character lists to create passwords based on mode ####
+            # Upper and lower case letters with numbers
+          if mode == "string_full":
+           characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
+                         "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
+                         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z", \
+                         "S", "A", "T", "C", "B", "D", "E", "F", "W", "G", "H", "I", \
+                         "L", "P", "R", "M", "U", "N", "O", "J", "K", "X", "V", "Y", \
+                         "Q", "Z"]
+            # Lower case letters with numbers
+          elif mode == "string_lower":
+           characters = ["s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
+                         "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", \
+                         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "q", "z"]
+            # Numeric characters only for PIN-type passwords
+          elif mode == "numeric":
+           characters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-      elif mode == "dictionary": # Single run only, no bulk passwords
-         # Try words starting with each letter in this order. These are all sections in the word list
-       word_order = ["common", "s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
-                     "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", "q", "z"]
+          elif mode == "dictionary": # Single run only, no bulk passwords
+             # Try words starting with each letter in this order. These are all sections in the word list
+           word_order = ["common", "s", "a", "t", "c", "b", "d", "e", "f", "w", "g", "h", "i", \
+                         "l", "p", "r", "m", "u", "n", "o", "j", "k", "x", "v", "y", "q", "z"]
 
-        # Load the word file into words_list array
-       with open('words.txt') as word_holder:
-        words_list = json.load(word_holder)[0]
-        print(len(words_list))
+            # Load the word file into words_list array
+           with open('words.txt') as word_holder:
+            words_list = json.load(word_holder)[0]
+            print(len(words_list))
 
-        # Currently trying words starting with this letter in word list
-       current_letter = word_order[0]
-        # Index of current word withing its letter's section
-       current_letter_index = 0
+            # Currently trying words starting with this letter in word list
+           current_letter = word_order[0]
+            # Index of current word withing its letter's section
+           current_letter_index = 0
 
-        # Number of guesses for current password
-       guesses = 0
-        # Current guess from generate() function
-       current_guess = ""
-        # Number of guesses for all passwords
-       all_guesses = 0
-        # Number of passwords to crack (bulk password runs only work with brute force, not dictionary)
-       reps = [0, 1]
-        # Flag to stop guessing when attempt is sucessfull
-       status = "ongoing"
+            # Number of guesses for current password
+           guesses = 0
+            # Current guess from generate() function
+           current_guess = ""
+            # Number of guesses for all passwords
+           all_guesses = 0
+            # Number of passwords to crack (bulk password runs only work with brute force, not dictionary)
+           reps = [0, 1]
+            # Flag to stop guessing when attempt is sucessfull
+           status = "ongoing"
 
-        # Length to start guessing, will increment as all combinations are tried
-       password_length_to_start = 1
-        # Current guessing length
-       password_length = password_length_to_start
-        # Length of target passwords to create for bulk runs
-       password_length_to_generate = 3
+            # Length to start guessing, will increment as all combinations are tried
+           password_length_to_start = 1
+            # Current guessing length
+           password_length = password_length_to_start
+            # Length of target passwords to create for bulk runs
+           password_length_to_generate = 3
 
-        # String to hold the target password
-       target_password = ""
+            # String to hold the target password
+           target_password = ""
 
-        # Indexes for each character in a password
-       digits = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0}
+            # Indexes for each character in a password
+           digits = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0}
+
+                       ### MAIN LOOP
+            # Get the starting time to compare to end time for bulk runs
+            total_time = 0.0
+
+            # Until the quota of passwords have been cracked (Bulk runs)
+            ## or the user enters an empty password (single runs)
+            while reps[0] < reps[1]:
+                 status = "ongoing"
+
+
+            if mode == "dictionary":
+            # Reset the indexes for the all_words array to zero
+                   current_letter = word_order[0]
+                   current_letter_index = 0
+            else:
+            # Reset the digits array indexes to zero
+                     for pos in digits:
+                      digits[pos] = 0
+                      password_length = password_length_to_start
+            # If multiple runs, create random target_password for this run
+                      if reps[1] > 1:
+            # Create a string from randomly chosen characters
+                       target_password = ""
+            while len(target_password) < password_length_to_generate:
+            # Append a random index from the characters list to target password
+                         target_password += random.choice(characters)
+                         reps[0] += 1
+
+            # For single runs, prompt for target password each time instead
+            else:
+                           target_password = str(input("Enter a password to test\n"))
+
+            # Leaving empty will exit main loop
+            if target_password == "":
+                             reps[0] += 1
+                             status = "stopped"
+                             print(status)
+
+            # Get the starting time for this run
+            this_time = time.time()
+            guesses = 0
+            # Start guessing until correct
+            while status == "ongoing":
+            # Generate a new guess
+             guesses += 1
+            if mode == "dictionary":
+              generate_dictionary_word()
+            else:
+                generate_brute_force()
+                if current_guess == target_password:
+                 elapsed = time.time() - this_time
+                 status = "Cracked"
+                 print(status + ": " + current_guess)
+                 print(str(guesses) + " guesses, " + str(elapsed) + " seconds.\n___________\n")
+                 all_guesses += guesses
+                 total_time += elapsed
+
+
+            # Calculate and display overall stats for bulk runs
+            if reps[1] > 1:
+             print(str(all_guesses / reps[1]) + " guesses per password")
+             print(str(total_time / reps[1]) + " seconds per password")
+             print(str(all_guesses / float(total_time)) + " guesses per second")
 
 
         # Create a brute-force password guess using the values from digits array
@@ -144,66 +209,3 @@
              all_guesses += (guesses + 1)
              guesses = 0
 
-        ### MAIN LOOP
-        # Get the starting time to compare to end time for bulk runs
-        total_time = 0.0
-
-        # Until the quota of passwords have been cracked (Bulk runs)
-        ## or the user enters an empty password (single runs)
-        while reps[0] < reps[1]:
-             status = "ongoing"
-
-
-        if mode == "dictionary":
-        # Reset the indexes for the all_words array to zero
-               current_letter = word_order[0]
-               current_letter_index = 0
-        else:
-        # Reset the digits array indexes to zero
-                 for pos in digits:
-                  digits[pos] = 0
-                  password_length = password_length_to_start
-        # If multiple runs, create random target_password for this run
-                  if reps[1] > 1:
-        # Create a string from randomly chosen characters
-                   target_password = ""
-        while len(target_password) < password_length_to_generate:
-        # Append a random index from the characters list to target password
-                     target_password += random.choice(characters)
-                     reps[0] += 1
-
-        # For single runs, prompt for target password each time instead
-        else:
-                       target_password = str(input("Enter a password to test\n"))
-
-        # Leaving empty will exit main loop
-        if target_password == "":
-                         reps[0] += 1
-                         status = "stopped"
-                         print(status)
-
-        # Get the starting time for this run
-        this_time = time.time()
-        guesses = 0
-        # Start guessing until correct
-        while status == "ongoing":
-        # Generate a new guess
-         guesses += 1
-        if mode == "dictionary":
-          generate_dictionary_word()
-        else:
-            generate_brute_force()
-            if current_guess == target_password:
-             elapsed = time.time() - this_time
-             status = "Cracked"
-             print(status + ": " + current_guess)
-             print(str(guesses) + " guesses, " + str(elapsed) + " seconds.\n___________\n")
-             all_guesses += guesses
-             total_time += elapsed
-
-
-        # Calculate and display overall stats for bulk runs
-        if reps[1] > 1:
-         print(str(all_guesses / reps[1]) + " guesses per password")
-         print(str(total_time / reps[1]) + " seconds per password")
-         print(str(all_guesses / float(total_time)) + " guesses per second")
