@@ -2,20 +2,61 @@
     Layout = "";
 }
 
-<h1>Shady site dot gov dot net dot org copyright 1992</h1>
+<style>
+    body    {
+        background-color: dimgrey;
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0;
+    }
+
+    #funnyheader    {
+        background-color: black;
+        width: 100%;
+        padding: 5px;
+    }
+
+    #funnyheader h1 {
+        color: white;
+    }
+
+    #WE_Warning {
+        margin: auto;
+        width: 50%;
+        height: 25%;
+        background-color: white;
+        position: absolute;
+        left: 100px;
+        flex-wrap: wrap;
+        justify-content:flex-start;
+        align-content:center;
+        padding:8px;
+        top: 45px;
+    }
+
+    #WE_Warning p {
+        font-size 20px;
+    }
+</style>
+
+<div id="funnyheader">
+    <h1>Shady site dot gov dot net dot org copyright 1992</h1>
+</div>
 
 <h2>We need your password right now enter it here</h2>
 
 <textarea name="atrick" id="WE_BadInput"></textarea>
 
 <div id="WE_Warning" style="display:none;">
+    <div>
+        <img href="/wwwroot/we_logo.jpg" />
+    </div>
     <p><b>STOP!</b> You have fallen for a malicious site! Please <a href="https://localhost:7128/WatchfulEye/PhishingSimulator">Click Here</a> to go to the WatchfulEye Phishing Simulation page.</p>
 </div>
 
 <script>
     document.getElementById('WE_BadInput').onclick = function (e) {
         console.log("They clicked");
-        document.getElementById('WE_Warning').style = "display: block;";
+        document.getElementById('WE_Warning').style = "display: flex;";
         document.getElementById('WE_BadInput').disabled = true;
     };
 </script>
