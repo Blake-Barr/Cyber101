@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchfulEye.Data;
+using WatchfulEye.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<WatchfulEyeContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<WatchfulEyeContext>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -32,7 +40,7 @@ using (var scope = app.Services.CreateScope())
 
     var context = services.GetRequiredService<WatchfulEyeContext>();
     context.Database.EnsureCreated();
-    DbInitializer.Initialize(context);
+    //await DbInitializer.Initialize(context, app, scope);
 }
 
 app.UseHttpsRedirection();

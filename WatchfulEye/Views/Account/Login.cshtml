@@ -1,0 +1,29 @@
+﻿@using WatchfulEye.ViewModels;
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+<h1>Login</h1>
+
+<div class="WE_Section">
+    @if(TempData["Error"] != null)  {
+        <p>@TempData["Error"]</p>
+    }
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Email" class=""></label>
+            <input asp-for="Email" class="" />
+            <span asp-validation-for="Email" class=""></span>
+        </div>
+        <div>
+            <label asp-for="Password" class=""></label>
+            <input asp-for="Password" class="" />
+            <span asp-validation-for="Password" class=""></span>
+        </div>
+        <div>
+            <input class="btn btn-outline-success" type="submit" value="Log In"/>
+        </div>
+    </form>
+</div>

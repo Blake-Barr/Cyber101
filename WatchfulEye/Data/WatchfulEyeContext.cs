@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WatchfulEye.Models;
 
 namespace WatchfulEye.Data
 {
-    public class WatchfulEyeContext : DbContext
+    public class WatchfulEyeContext : IdentityDbContext<AppUser>
     {
 
         public WatchfulEyeContext(DbContextOptions<WatchfulEyeContext> options) : base(options)
@@ -23,6 +24,8 @@ namespace WatchfulEye.Data
         {
             modelBuilder.Entity<EmailTemplate>().ToTable("Email");
             modelBuilder.Entity<FakeSite>().ToTable("FakeSite");
+            modelBuilder.Entity<AppUser>().ToTable("AppUser");
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

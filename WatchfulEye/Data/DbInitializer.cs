@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Xml;
 using WatchfulEye.Models;
 
@@ -6,7 +7,7 @@ namespace WatchfulEye.Data
 {
     public class DbInitializer
     {
-        public static void Initialize(WatchfulEyeContext cx)
+        public static async Task Initialize(WatchfulEyeContext cx, IApplicationBuilder app, IServiceScope scope)
         {
 
             cx.Database.EnsureDeleted();
@@ -29,6 +30,11 @@ namespace WatchfulEye.Data
                 //return;
             }
 
+            if (cx.Users.Any())
+            {
+                //return;
+            }
+
             var emails = new EmailTemplate[]
             {
                 new EmailTemplate{difficultyLevel=0,name="test email",HTML="<h1>Hello</h1>",header="test email"},
@@ -42,6 +48,14 @@ namespace WatchfulEye.Data
             {
                 new FakeSite{HTML="<html><style>h1  {color: red;}</style><body><h1>This is a test.</h1><p id='WE_SpotGameClue'>this is a bad thing!</p></body></html>",fakeURL="www.fake.com"}
             };
+
+            var rm = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            if (!await rm.RoleExistsAsync(UserRoles.Admin))
+                await rm.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await rm.RoleExistsAsync(UserRoles.User))
+                await rm.CreateAsync(new IdentityRole(UserRoles.User));
+
             cx.emailTemplates.AddRange(emails);
             cx.fakeSites.AddRange(sites);
             cx.SaveChanges();
