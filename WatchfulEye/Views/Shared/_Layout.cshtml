@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -50,10 +59,10 @@
                         <li class="nav-item">
                             <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (SignInManager.IsSignedIn(User))
                         {
                         <li class="nav-item">
-                                <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Main">Logged In</a>
+                                <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Main">@currentUser.UserName</a>
                         </li>
                         <li class="nav-item">
                                 <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>

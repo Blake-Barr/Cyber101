@@ -17,5 +17,9 @@ namespace WatchfulEye.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password do not match")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Username")]
+        [Required(ErrorMessage = "Username is required")]
+        public string Username { get; set; }
     }
 }
