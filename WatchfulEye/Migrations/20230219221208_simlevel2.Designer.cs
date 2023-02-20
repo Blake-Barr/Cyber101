@@ -12,8 +12,8 @@ using WatchfulEye.Data;
 namespace WatchfulEye.Migrations
 {
     [DbContext(typeof(WatchfulEyeContext))]
-    [Migration("20230119001936_new")]
-    partial class @new
+    [Migration("20230219221208_simlevel2")]
+    partial class simlevel2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -165,9 +165,15 @@ namespace WatchfulEye.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AssignedLevelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CurrentCompletedLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -216,6 +222,8 @@ namespace WatchfulEye.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AssignedLevelId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -277,6 +285,25 @@ namespace WatchfulEye.Migrations
                     b.ToTable("FakeSite", (string)null);
                 });
 
+            modelBuilder.Entity("WatchfulEye.Models.Simulator.SimulatorLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("gameType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("levelNum")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("simLevels");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -326,6 +353,15 @@ namespace WatchfulEye.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WatchfulEye.Models.AppUser", b =>
+                {
+                    b.HasOne("WatchfulEye.Models.Simulator.SimulatorLevel", "AssignedLevel")
+                        .WithMany()
+                        .HasForeignKey("AssignedLevelId");
+
+                    b.Navigation("AssignedLevel");
                 });
 #pragma warning restore 612, 618
         }

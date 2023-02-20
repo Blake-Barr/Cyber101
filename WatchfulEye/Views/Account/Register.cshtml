@@ -10,34 +10,34 @@
     @if (TempData["Error"] != null)
     {
         <div class="col-md-12 alert alert-danger">
-            <span><b>Sorry!</b> - @TempData["Error"] </span>
+            <span>@TempData["Error"]</span>
         </div>
     }
 
-    <div class="row">
-        <div class="col-md-8 offset-2">
+    <div class="">
+        <div class="">
             <form asp-action="Register">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
-                    <label asp-for="Username" class="control-label"></label>
-                    <input asp-for="Username" class="form-control" />
+                    <label asp-for="Username" class=""></label>
+                    <input asp-for="Username" class="" />
                     <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="EmailAddress" class="control-label"></label>
-                    <input asp-for="EmailAddress" class="form-control" />
+                    <label asp-for="EmailAddress" class=""></label>
+                    <input asp-for="EmailAddress" class="" />
                     <span asp-validation-for="EmailAddress" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
+                    <label asp-for="Password" class=""></label>
+                    <input asp-for="Password" class="" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <label asp-for="ConfirmPassword" class=""></label>
+                    <input asp-for="ConfirmPassword" class="" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
 

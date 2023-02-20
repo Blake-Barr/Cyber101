@@ -4,7 +4,7 @@
 
 namespace WatchfulEye.Migrations
 {
-    public partial class nullable : Migration
+    public partial class simlevelcontent2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

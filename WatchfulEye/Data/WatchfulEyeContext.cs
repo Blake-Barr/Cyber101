@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WatchfulEye.Models;
+using WatchfulEye.Models.Simulator;
 
 namespace WatchfulEye.Data
 {
@@ -19,6 +20,9 @@ namespace WatchfulEye.Data
 
         public DbSet<EmailTemplate> emailTemplates { get; set; }
         public DbSet<FakeSite> fakeSites { get; set; }
+        public DbSet<SimulatorLevel> simLevels { get; set; }
+        public DbSet<SimulatorLevelContent> simContent{ get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

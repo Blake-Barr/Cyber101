@@ -4,32 +4,34 @@
 
 namespace WatchfulEye.Migrations
 {
-    public partial class _123 : Migration
+    public partial class simulatorcontent5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "FirstName",
-                table: "AspNetUsers",
+                name: "LevelDesc",
+                table: "simLevels",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "LastName",
-                table: "AspNetUsers",
+                name: "LevelName",
+                table: "simLevels",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FirstName",
-                table: "AspNetUsers");
+                name: "LevelDesc",
+                table: "simLevels");
 
             migrationBuilder.DropColumn(
-                name: "LastName",
-                table: "AspNetUsers");
+                name: "LevelName",
+                table: "simLevels");
         }
     }
 }

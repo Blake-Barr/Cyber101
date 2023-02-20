@@ -101,6 +101,11 @@ body {
     color: #26408B;
 }
 
+.WE_Logo    {
+    margin: auto;
+    text-align: center;
+    width: 112px;
+}
 /* Tree Input */
 
 div#tree-container {

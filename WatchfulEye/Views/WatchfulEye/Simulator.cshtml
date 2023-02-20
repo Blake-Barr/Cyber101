@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Simulator";
+    var level = ViewData.Model;
+}
+
+<h1 id="lvlName">@level.LevelName</h1>
+
+<div id="lvlDesc" class="WE_Section WE_BruteForce">
+    <p>@level.LevelDesc</p>
+</div>
+
+<div id="lvlInteractive" class="WE_Section WE_BruteForce">
+    @Html.Raw(level.RenderLevel())
+</div>
+
+<div class="WE_Section">
+    <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="CompleteLevel">Complete</a>
+</div>
+
+
+
