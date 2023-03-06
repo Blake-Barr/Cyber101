@@ -10,11 +10,13 @@ namespace WatchfulEye.Models
 
         private int _toNextLevel = 10;
 
+        private int _currentLevel = 1;
+
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
 
-        public int CurrentCompletedLevel { get; set; }
+        public int CurrentCompletedLevel { get { return _currentLevel; } set { _currentLevel = value; } }
 
         public SimulatorLevel? AssignedLevel { get; set; }
 

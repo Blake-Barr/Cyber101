@@ -6,24 +6,20 @@ namespace WatchfulEye.Models.Simulator
     {
         public int Id { get; set; }
         public int? LevelNum { get; set; }
-        public int? GameType { get; set; }
-        public string HTMLContent { get; set; }
-        public string LevelName { get; set; }
-        public string LevelDesc { get; set; }
+
+        public SimulatorLevelContent? SLC { get; set; }
 
         public int GameAmt = 1;
 
+        public int? SLCId { get; set; }
+
         public SimulatorLevel() { }
 
-        public SimulatorLevel(int levelNum, int gameType)
+        public SimulatorLevel(int levelNum)
         {
             this.LevelNum = levelNum;
-            this.GameType = gameType;
         }
 
-        public string RenderLevel()
-        {
-            return HTMLContent;
-        }
+
     }
 }

@@ -12,8 +12,8 @@ using WatchfulEye.Data;
 namespace WatchfulEye.Migrations
 {
     [DbContext(typeof(WatchfulEyeContext))]
-    [Migration("20230219221208_simlevel2")]
-    partial class simlevel2
+    [Migration("20230306232315_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,11 +182,17 @@ namespace WatchfulEye.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -213,6 +219,9 @@ namespace WatchfulEye.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ToNextLevel")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -293,15 +302,54 @@ namespace WatchfulEye.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("gameType")
+                    b.Property<int?>("LevelNum")
                         .HasColumnType("int");
 
-                    b.Property<int?>("levelNum")
+                    b.Property<int?>("SLCId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SLCId");
+
                     b.ToTable("simLevels");
+                });
+
+            modelBuilder.Entity("WatchfulEye.Models.Simulator.SimulatorLevelContent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GameType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HTMLContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuizAnswerKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TotalSpots")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TutorialLevel")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("simContent");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,6 +410,15 @@ namespace WatchfulEye.Migrations
                         .HasForeignKey("AssignedLevelId");
 
                     b.Navigation("AssignedLevel");
+                });
+
+            modelBuilder.Entity("WatchfulEye.Models.Simulator.SimulatorLevel", b =>
+                {
+                    b.HasOne("WatchfulEye.Models.Simulator.SimulatorLevelContent", "SLC")
+                        .WithMany()
+                        .HasForeignKey("SLCId");
+
+                    b.Navigation("SLC");
                 });
 #pragma warning restore 612, 618
         }

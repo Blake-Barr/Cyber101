@@ -300,25 +300,15 @@ namespace WatchfulEye.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("GameType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("HTMLContent")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LevelDesc")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LevelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("LevelNum")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SLCId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SLCId");
 
                     b.ToTable("simLevels");
                 });
@@ -345,6 +335,15 @@ namespace WatchfulEye.Migrations
                     b.Property<string>("LevelTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuizAnswerKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TotalSpots")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TutorialLevel")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -409,6 +408,15 @@ namespace WatchfulEye.Migrations
                         .HasForeignKey("AssignedLevelId");
 
                     b.Navigation("AssignedLevel");
+                });
+
+            modelBuilder.Entity("WatchfulEye.Models.Simulator.SimulatorLevel", b =>
+                {
+                    b.HasOne("WatchfulEye.Models.Simulator.SimulatorLevelContent", "SLC")
+                        .WithMany()
+                        .HasForeignKey("SLCId");
+
+                    b.Navigation("SLC");
                 });
 #pragma warning restore 612, 618
         }

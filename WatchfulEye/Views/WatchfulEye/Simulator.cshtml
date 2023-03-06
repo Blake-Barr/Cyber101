@@ -1,21 +1,34 @@
-﻿@{
+﻿@using WatchfulEye.ViewModels;
+@model SimulatorLevelViewModel
+
+@{
     ViewData["Title"] = "Simulator";
-    var level = ViewData.Model;
+    var content = Model.simulatorLevelContent;
+    var level = Model.simulatorLevel;
 }
 
-<h1 id="lvlName">@level.LevelName</h1>
+<h1 id="lvlName">@content.LevelTitle</h1>
 
 <div id="lvlDesc" class="WE_Section WE_BruteForce">
-    <p>@level.LevelDesc</p>
+    <p>@content.LevelDescription</p>
 </div>
 
 <div id="lvlInteractive" class="WE_Section WE_BruteForce">
-    @Html.Raw(level.RenderLevel())
+    @Html.Raw(content.RenderLevel())
 </div>
 
 <div class="WE_Section">
-    <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="CompleteLevel">Complete</a>
+    <a class="nav-link navLink" id="completionButton" href="javascript:callCheck();"> Complete </a>
 </div>
+
+<script src="~/js/simulator.js"></script>
+
+<script>
+    function callCheck()    {
+        var data = @Html.Raw(Json.Serialize(Model));
+        checkForCompletion(data);
+    }
+</script>
 
 
 

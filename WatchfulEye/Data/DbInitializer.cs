@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Xml;
 using WatchfulEye.Models;
+using WatchfulEye.Models.Simulator;
 
 namespace WatchfulEye.Data
 {
@@ -10,9 +11,9 @@ namespace WatchfulEye.Data
         public static async Task Initialize(WatchfulEyeContext cx, IApplicationBuilder app, IServiceScope scope)
         {
 
-            cx.Database.EnsureDeleted();
+            //cx.Database.EnsureDeleted();
 
-            cx.Database.Migrate();
+            //cx.Database.Migrate();
 
             if (cx.emailTemplates.Any())
             {
@@ -23,6 +24,14 @@ namespace WatchfulEye.Data
             }
 
             if (cx.fakeSites.Any())
+            {
+                foreach (var entity in cx.fakeSites)
+                    cx.fakeSites.Remove(entity);
+                cx.SaveChanges();
+                //return;
+            }
+
+            if (cx.simContent.Any())
             {
                 foreach (var entity in cx.fakeSites)
                     cx.fakeSites.Remove(entity);
@@ -49,6 +58,22 @@ namespace WatchfulEye.Data
                 new FakeSite{HTML="<html><style>h1  {color: red;}</style><body><h1>This is a test.</h1><p id='WE_SpotGameClue'>this is a bad thing!</p></body></html>",fakeURL="www.fake.com"}
             };
 
+            var simContents = new SimulatorLevelContent[]
+            {
+                new SimulatorLevelContent{GameType = -1, HTMLContent = "<p> Level 1 </p>", LevelDescription="Welcome to the simulator! These first three levels will introduce you to some concepts related to phishing, as well as guide you through a tutorial level to get you familiar with the simulator level process. Have fun!"
+                , LevelTitle="Simulator Tutorial - Part 1", TutorialLevel = 1},
+                new SimulatorLevelContent{GameType = -1, HTMLContent = "<p> Level 2 </p>", LevelDescription="Level 2 Description"
+                , LevelTitle="Simulator Tutorial - Part 2", TutorialLevel = 2},
+                new SimulatorLevelContent{GameType = -1, HTMLContent = "<p> Level 3 </p>", LevelDescription="Level 3 Description"
+                , LevelTitle="Simulator Tutorial - Part 3", TutorialLevel = 3},
+                new SimulatorLevelContent{GameType = 0, HTMLContent = "<div id=\"quiz_body\">\r\n    <div class=\"question\">\r\n        <p>A method of authentication where an application proves the user's identity by requesting a user accomplish a specific task or set of tasks using other forms of identity verification (cell phones, emails, fingerprints, etc)</p>\r\n        <input type=\"radio\" id=\"a1\" name=\"q1\" value=\"A\">\r\n        <label for=\"a1\">Phishing</label><br>\r\n        <input type=\"radio\" id=\"a2\" name=\"q1\" value=\"B\">\r\n        <label for=\"a2\">Passwords</label><br>  \r\n        <input type=\"radio\" id=\"a3\" name=\"q1\" value=\"C\">\r\n        <label for=\"a3\">Multi-factor Authentication</label><br>\r\n        <input type=\"radio\" id=\"a4\" name=\"q1\" value=\"D\">\r\n        <label for=\"a4\">None of the above</label><br><br>\r\n    </div>\r\n    <div class=\"question\">\r\n        <p>Some services offer a feature to 'hide' your email when a website requests it, creating a disposable email address that will then redirect the requested information to your primary email. What is the primary benefit of this functionality?</p>\r\n        <input type=\"radio\" id=\"b1\" name=\"q2\" value=\"A\">\r\n        <label for=\"b1\">Prevents hackers from accessing your email via password guessing</label><br>\r\n        <input type=\"radio\" id=\"b2\" name=\"q2\" value=\"B\">\r\n        <label for=\"b2\">Hides your data from the website to reduce possible incoming spam</label><br>  \r\n        <input type=\"radio\" id=\"b3\" name=\"q2\" value=\"C\">\r\n        <label for=\"b3\">Secures the email exchange to prevent 'man in the middle' attacks.</label><br>\r\n        <input type=\"radio\" id=\"b4\" name=\"q2\" value=\"D\">\r\n        <label for=\"b4\">Allows Apple to build a superarmy of ICloud domains, as an effort towards their planned revolution.</label><br><br>\r\n    </div>\r\n    <div class=\"question\">\r\n        <p>What is the first thing you should do in the case that your password gets stolen?</p>\r\n        <input type=\"radio\" id=\"c1\" name=\"q3\" value=\"A\">\r\n        <label for=\"c1\">Delete the account you were trying to log into.</label><br>\r\n        <input type=\"radio\" id=\"c2\" name=\"q3\" value=\"B\">\r\n        <label for=\"c2\">Destroy your computer and live in the woods.</label><br>  \r\n        <input type=\"radio\" id=\"c3\" name=\"q3\" value=\"C\">\r\n        <label for=\"c3\">Cancel all of your credit cards.</label><br>\r\n        <input type=\"radio\" id=\"c4\" name=\"q3\" value=\"D\">\r\n        <label for=\"c4\">Change your password on all accounts connected to the stolen password.</label><br><br>\r\n    </div>\r\n</div>", LevelDescription="Quiz A desc"
+                , LevelTitle="Quiz", TutorialLevel = 0, QuizAnswerKey = "CBD"},
+                new SimulatorLevelContent{GameType = 0, HTMLContent = "<div id=\"quiz_body\">\r\n    <div class=\"question\">\r\n        <p>What are some things you should look out for to ensure the site you are visiting is not an impersonation?</p>\r\n        <input type=\"radio\" id=\"a1\" name=\"q1\" value=\"A\">\r\n        <label for=\"a1\">The URL</label><br>\r\n        <input type=\"radio\" id=\"a2\" name=\"q1\" value=\"B\">\r\n        <label for=\"a2\">Any low-quality, misleading or strange information on the site</label><br>  \r\n        <input type=\"radio\" id=\"a3\" name=\"q1\" value=\"C\">\r\n        <label for=\"a3\">Dead Links</label><br>\r\n        <input type=\"radio\" id=\"a4\" name=\"q1\" value=\"D\">\r\n        <label for=\"a4\">All of the above</label><br><br>\r\n    </div>\r\n    <div class=\"question\">\r\n        <p>If you receive a concerning email from a service, what is the best way to approach this issue?</p>\r\n        <input type=\"radio\" id=\"b1\" name=\"q2\" value=\"A\">\r\n        <label for=\"b1\">Directly reply to the email with the requested information.</label><br>\r\n        <input type=\"radio\" id=\"b2\" name=\"q2\" value=\"B\">\r\n        <label for=\"b2\">Use links in the email to get to their website to resolve the issue.</label><br>  \r\n        <input type=\"radio\" id=\"b3\" name=\"q2\" value=\"C\">\r\n        <label for=\"b3\">Contact the company using contact information from their official site.</label><br>\r\n    </div>\r\n    <div class=\"question\">\r\n        <p>What is a good practice to follow when creating a password?</p>\r\n        <input type=\"radio\" id=\"c1\" name=\"q3\" value=\"A\">\r\n        <label for=\"c1\">Use a lengthy mixture of characters, numbers and symbols that cannot easily be guessed.</label><br>\r\n        <input type=\"radio\" id=\"c2\" name=\"q3\" value=\"B\">\r\n        <label for=\"c2\">Use a password that you have created on another site.</label><br>  \r\n        <input type=\"radio\" id=\"c3\" name=\"q3\" value=\"C\">\r\n        <label for=\"c3\">Use simple words (password, admin)</label><br>\r\n        <input type=\"radio\" id=\"c4\" name=\"q3\" value=\"D\">\r\n        <label for=\"c4\">Ask someone to create a password for you.</label><br><br>\r\n    </div>\r\n</div>", LevelDescription="Quiz B desc"
+                , LevelTitle="Quiz", TutorialLevel = 0, QuizAnswerKey = "DCA"},
+                new SimulatorLevelContent{GameType = 0, HTMLContent = "<div id=\"quiz_body\">\r\n    <p>you are an employee of a small company, named NuSun, that houses 20 employees. You are one of the 4 Human Resource specilists within NuSun.\r\n        The other Three HR specialists are named Amy Douglas, Matt Ryan, and Ken Madden. The HR department always goes to lunch from 12pm to 1pm durning the week. <br>\r\n        At around 9am on a Tuesday, the HR department is notified that Matt won't be able to make it in due to being exposed to Covid 19. Ten minutes before your lunch break, you recieve an email from Matt.\r\n        In this email, Matt is requestion some information on an employee named Scott Robbert.<br>\r\n        In the next questions, choose the correct responses.\r\n    </p>\r\n    <div class=\"question\">\r\n        <p>From:Matt.Ryan@NuSun.com\r\n            <br />\r\n            To: hruser@NuSun.com\r\n            <br />\r\n            Hey,\r\n            <br />\r\n            <br />\r\n            I have messed up big time. I forgot that I need to give the Finance department Scott Robberts information so they can start his payroll.\r\n            <br />\r\n            I don't have time to follow the procedures. If you help me with this I will make it up to you in the future.</p>\r\n        <input type=\"radio\" id=\"a2\" name=\"q1\" value=\"A\">\r\n        <label for=\"a2\">Matt, I hope you are feeling better. Unfortunately I will not be able to obtain this information for you. We have procedures in place to protect our employees' information.</label><br>  \r\n        <input type=\"radio\" id=\"a3\" name=\"q1\" value=\"B\">\r\n        <label for=\"a3\">Happy to help you with this. I have attached the information you are seeking below. If there's anything else that needs to be done, please let me know.</label><br>\r\n    </div>\r\n    <div class=\"question\">\r\n        <p>From:Matt.Ryan@NuSun.com\r\n            <br />To: hruser@NuSun.com\r\n            <br />\r\n            Hey,\r\n            <br />\r\n            <br />\r\n            I really need to get this information turned in before the Finance team goes to lunch. This is very important and I know that I dropped the ball on this.\r\n            <br />\r\n            If I don't get this information over I will lose my job. You don't want me to lose my job over this mistake, do you?</p>\r\n        <input type=\"radio\" id=\"b1\" name=\"q2\" value=\"A\">\r\n        <label for=\"b1\">I do not want anyone to lose their job. I will be more than happy to help. I have attached the information you are seeking below. If there's anything else that needs to be done please let me know.</label><br>\r\n        <input type=\"radio\" id=\"b3\" name=\"q2\" value=\"B\">\r\n        <label for=\"b3\">This behavior is not common coming from you. I will be reporting this incident to management. I will not be helping you any further with this.</label><br>\r\n    </div>\r\n</div>", LevelDescription="Quiz C desc"
+                , LevelTitle="Quiz", TutorialLevel = 0, QuizAnswerKey = "AB"}
+            };
+
             var rm = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             if (!await rm.RoleExistsAsync(UserRoles.Admin))
@@ -58,6 +83,7 @@ namespace WatchfulEye.Data
 
             cx.emailTemplates.AddRange(emails);
             cx.fakeSites.AddRange(sites);
+            cx.simContent.AddRange(simContents);
             cx.SaveChanges();
         }
     }

@@ -40,7 +40,7 @@ using (var scope = app.Services.CreateScope())
 
     var context = services.GetRequiredService<WatchfulEyeContext>();
     context.Database.EnsureCreated();
-    //await DbInitializer.Initialize(context, app, scope);
+    await DbInitializer.Initialize(context, app, scope);
 }
 
 app.UseHttpsRedirection();
