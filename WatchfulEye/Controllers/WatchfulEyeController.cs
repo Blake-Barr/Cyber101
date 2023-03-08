@@ -92,7 +92,7 @@ namespace WatchfulEye.Controllers
                         Random rnd = new Random();
                         var num = rnd.Next(0, 10);
                         // test value
-                        num = 0;
+                        num = 1;
 
                         var simLevel = new SimulatorLevel(lvl);
                         SimulatorLevelContent[] contents = db.simContent.Where(b => b.GameType == num).ToArray();
@@ -118,7 +118,7 @@ namespace WatchfulEye.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonObject> CheckCompletion(SimulatorLevelViewModel slvm, string answers)
+        public async Task<JsonObject> CheckCompletion(SimulatorLevelViewModel slvm, string answers, int spotCount)
         {
             var obj = new JsonObject();
             switch (slvm.simulatorLevelContent.GameType)
@@ -139,6 +139,18 @@ namespace WatchfulEye.Controllers
                         obj.Add("incorrectList", String.Join("", results.Matches));
                         return obj;
                     }
+                case 1:
+                    if(spotCount >= slvm.simulatorLevelContent.TotalSpots)
+                    {
+                        obj.Add("completed", await CompleteLevel());
+                        return obj;
+                    }
+                    else
+                    {
+                        obj.Add("completed", false);
+                        return obj;
+                    }
+
             }
 
             return obj;

@@ -7,6 +7,8 @@
     var level = Model.simulatorLevel;
 }
 
+<script src="~/js/simulator.js"></script>
+
 <h1 id="lvlName">@content.LevelTitle</h1>
 
 <div id="lvlDesc" class="WE_Section WE_BruteForce">
@@ -21,11 +23,18 @@
     <a class="nav-link navLink" id="completionButton" href="javascript:callCheck();"> Complete </a>
 </div>
 
-<script src="~/js/simulator.js"></script>
+
 
 <script>
+
+    var data = @Html.Raw(Json.Serialize(Model));
+    console.log(data);
+
+    $(window).on('load', function () {
+        gameSetup(data);
+    });
+
     function callCheck()    {
-        var data = @Html.Raw(Json.Serialize(Model));
         checkForCompletion(data);
     }
 </script>
