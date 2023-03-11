@@ -7,6 +7,10 @@ using WatchfulEye.Controllers;
 using WatchfulEye.Models.Simulator;
 using WatchfulEye.ViewModels;
 using System.Text.Json.Nodes;
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using System.Net.Mail;
+using System.Xml.Linq;
 
 namespace WatchfulEye.Controllers
 {
@@ -52,18 +56,6 @@ namespace WatchfulEye.Controllers
             return View(await db.emailTemplates.ToListAsync());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SendEmail([FromForm] int template, [FromForm] string emailAddress, [FromForm] string name)
-        {
-            var emailTemplate = await db.emailTemplates
-                .FirstOrDefaultAsync(m => m.ID == template);
-
-            PhishingModel m = new PhishingModel();
-            m.sendEmail(emailTemplate, emailAddress, name);
-
-            return RedirectToAction(nameof(PhishingSimulatorP3));
-        }
-
         // Test
         public IActionResult ShadySiteExample()
         {
@@ -92,7 +84,7 @@ namespace WatchfulEye.Controllers
                         Random rnd = new Random();
                         var num = rnd.Next(0, 10);
                         // test value
-                        num = 1;
+                        num = 5;
 
                         var simLevel = new SimulatorLevel(lvl);
                         SimulatorLevelContent[] contents = db.simContent.Where(b => b.GameType == num).ToArray();
@@ -118,7 +110,7 @@ namespace WatchfulEye.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonObject> CheckCompletion(SimulatorLevelViewModel slvm, string answers, int spotCount)
+        public async Task<JsonObject> CheckCompletion(SimulatorLevelViewModel slvm, string answers, int spotCount, string email, int template, string name)
         {
             var obj = new JsonObject();
             switch (slvm.simulatorLevelContent.GameType)
@@ -150,7 +142,22 @@ namespace WatchfulEye.Controllers
                         obj.Add("completed", false);
                         return obj;
                     }
-
+                case 2:
+                    var currentUser = await _userManager.GetUserAsync(User);
+                    PhishingModel m = new PhishingModel();
+                    var emailTemplate = await db.emailTemplates.FirstOrDefaultAsync(m => m.ID == template);
+                    m.sendEmail(emailTemplate, email, name, currentUser.Id);
+                    obj.Add("completed", await CompleteLevel());
+                    return obj;
+                case 3:
+                    obj.Add("completed", await CompleteLevel());
+                    return obj;
+                case 4:
+                    obj.Add("completed", await CompleteLevel());
+                    return obj;
+                case 5:
+                    obj.Add("completed", await CompleteLevel());
+                    return obj;
             }
 
             return obj;
@@ -192,6 +199,26 @@ namespace WatchfulEye.Controllers
             }
 
             return completed;
+        }
+
+        [HttpPost]
+        public JsonResult GetEmailTemplates(int amount)
+        {
+            Random rnd = new Random();
+            List<EmailTemplate> templates = db.emailTemplates.ToList();
+            templates = templates.OrderBy(x => rnd.Next()).Take(amount).ToList();
+            return Json(templates);
+        }
+
+        public async Task<IActionResult> Fooled(string userId)
+        {
+            var responsibleUser = await db.Users.FirstOrDefaultAsync(m => m.Id == userId);
+            if (responsibleUser != null)
+            {
+                responsibleUser.AwardXP(50);
+            }
+
+            return View();
         }
     }
 }

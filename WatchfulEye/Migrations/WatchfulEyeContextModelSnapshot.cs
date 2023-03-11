@@ -218,6 +218,9 @@ namespace WatchfulEye.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SentKey")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ToNextLevel")
                         .HasColumnType("int");
 
@@ -252,6 +255,10 @@ namespace WatchfulEye.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("HTML")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreviewPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -321,6 +328,15 @@ namespace WatchfulEye.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("CipherList")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CipherType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EncryptedWord")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("GameType")
                         .HasColumnType("int");
 
@@ -337,6 +353,9 @@ namespace WatchfulEye.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuizAnswerKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScamUserHTML")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TotalSpots")

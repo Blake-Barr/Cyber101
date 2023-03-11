@@ -28,6 +28,8 @@ namespace WatchfulEye.Models
 
         public int ToNextLevel { get { return _toNextLevel; } set { _toNextLevel = value; } }
 
+        public string? SentKey { get; set; }
+
         public bool AbleToLevel()
         {
             return Experience >= ToNextLevel;

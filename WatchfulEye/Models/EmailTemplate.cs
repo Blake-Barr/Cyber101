@@ -1,4 +1,6 @@
-﻿namespace WatchfulEye.Models
+﻿using System;
+
+namespace WatchfulEye.Models
 {
     public class EmailTemplate
     {
@@ -7,6 +9,7 @@
         public int difficultyLevel { get; set; }
         public string name { get; set; }
         public string header { get; set; }
+        public string PreviewPath { get; set; }
 
     }
 }

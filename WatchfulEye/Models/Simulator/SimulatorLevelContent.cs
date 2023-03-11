@@ -4,6 +4,8 @@
     {
 
         private string? _quizAnswerKey;
+
+        private string? _cipherList;
         public int Id { get; set; }
 
         public int GameType { get; set; }
@@ -26,6 +28,18 @@
         // Spot Game Fields
         public int? TotalSpots { get; set; }
 
+        // Cipher Game Fields
+        public string? CipherList
+        {
+            get { if (_cipherList != null) return _cipherList; else return ""; }
+            set { _cipherList = String.Join(",", value); }
+        }
+
+        public string? EncryptedWord { get; set; }
+
+        public int? CipherType { get; set; }
+
+        public string? ScamUserHTML { get; set; }
         public string RenderLevel()
         {
             return HTMLContent;
