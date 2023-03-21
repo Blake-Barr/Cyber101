@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
 }
 
 @media (min-width: 768px) {
@@ -16,7 +17,12 @@ html {
 body {
     margin-bottom: 60px;
     background-color: #0D0221;
+    background-image: linear-gradient(to right, #0D0221,#140752);
     min-height: 100%
+}
+
+header  {
+    margin-bottom: 20px
 }
 
 .mainContent {
@@ -32,7 +38,7 @@ body {
 
 .navContent2 {
     /*background-color: #0F084B;*/
-    background-color: #192a5c;
+    background-color: #0D0221;
     color: white;
 }
 
@@ -50,21 +56,264 @@ body {
 
 #WE_Nav {
     float:left;
-    background: aliceblue;
+    background: #0D0221;
 }
 
 #WE_NavigationList  {
     list-style-type: none;
 }
 
+main    {
+    height: 100%;
+}
+
+.WE_Container {
+    margin-top: 50px;
+    background: white;
+    color: black;
+    padding: 5px;
+    margin-bottom: 5px;
+    height: 100%;
+}
+
 .WE_Section {
     background: white;
     color: black;
-    padding: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.WE_NextLevel {
+    border-radius: 5px;
+    font-size: 20px;
+    border: 1px solid #1bab3d;
+    width: fit-content;
+    float: right;
+    background: #1bab3d
+}
+
+#lvlDesc {
+    color: white;
+}
+
+#lvlInteractive {
+}
+
+#lvlInteractive #WE_PhishingInformation div {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-bottom: 15px;
+}
+
+#lvlInteractive #WE_PhishingInformation div:last-child {
+    border-bottom: 0px solid black;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-bottom: 15px;
+}
+
+#lvlInteractive #quiz_body .question {
+    border-top: 1px solid black;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-bottom: 15px;
+}
+
+#lvlInteractive #quiz_body .question:first-child {
+    border-top: 0px solid black;
+}
+
+#lvlInteractive #quiz_body #scenanswers label {
+    width:90%;
+    display: contents !important
+}
+
+#lvlInteractive #quiz_body #scenanswers i.fa-times, #lvlInteractive #quiz_body .answers i.fa-times {
+    color: red;
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+#lvlInteractive #quiz_body #scenanswers i.fa-check, #lvlInteractive #quiz_body .answers i.fa-check {
+    color: green;
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+#lvlInteractive #quiz_body #scenanswers input {
+    clear:none;
+    width: auto;
+}
+
+#lvlInteractive #quiz_body #scenanswers div {
+    margin-top: 15px;
+}
+
+#lvlInteractive #quiz_body #scenanswers {
+    border-top: 1px solid lightgray;
+}
+
+#email_body > label {
+    width: 50px;
+}
+
+#email_body > input {
+    width: 50%
+}
+
+#email_body .templates  {
     margin-top: 25px;
 }
 
-.WE_Form .WE_Section{
+#email_body .templates label    {
+    width: 95%;
+    padding-bottom: 10px;
+    border-top: 1px solid black;
+}
+
+#cypherType {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#cypherDesc {
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+}
+
+#encryptContainer   {
+}
+
+#encText    {
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+#encOutputs {
+    display: flex;
+}
+
+#encOutputs div {
+    width: 50%;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid black;
+    margin-top: 15px;
+}
+
+#encOutputs div {
+    font-size: 20px;
+}
+
+#encryptContainer ul {
+    list-style-type: none;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+#encryptContainer ul li {
+    float: left;
+    width: 5%;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -10px
+}
+
+#cipher_body #wordbank  {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+#injects {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+#inject_body #injectGoal    {
+    height: 65px;
+    float: right;
+    width: 50%;
+    text-align: center
+}
+
+#inject_body #injectoutput {
+    height: 65px;
+    float: right;
+    width: 50%;
+    text-align: center
+}
+
+#injlabel   {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#injectSubmit   {
+    margin-bottom: px;
+}
+
+#results  {
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+    
+}
+
+.WE_LevelBorder {
+    border: 1px solid gray;
+    height: 100%;
+}
+
+.WE_LevelProgress {
+    height: 40px;
+    padding: 8px;
+    white-space: nowrap;
+    background-color: lawngreen
+}
+
+#WE_LevelProgressBar {
+    height: 42px;
+    margin: 10px;
+    background-color: lightgray;
+}
+
+#brute_body #req {
+    font-size: 20px;
+}
+
+#errorBox   {
+    background-color: palegoldenrod;
+    color: red;
+    border: 1px solid red;
+    padding: 8px;
+    font-size: 18px;
+}
+
+#errorBox h1 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.WE_Incorrect   {
+    color: red;
+}
+
+.WE_Correct {
+    color: green !important;
+}
+
+.WE_Form .WE_Section {
     display: flex;
     flex-direction: column
 }
@@ -93,6 +342,11 @@ body {
     width: 75%;
 }
 
+.WE_Form input.btn {
+    float: right;
+    width: 45%;
+}
+
 .WE_Section a   {
     color: black;
 }
@@ -102,10 +356,56 @@ body {
 }
 
 .WE_Logo    {
-    margin: auto;
     text-align: center;
-    width: 112px;
+    height: 40px;
 }
+
+.WE_Logo img {
+    text-align: center;
+    height: 40px;
+}
+
+.nav-link {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#LevelInfo  {
+    align-content: center;
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 50px;
+}
+
+#LevelInfo img {
+    margin: auto;
+    height: 10%;
+    filter: brightness(0%);
+}
+
+#LevelInfo b {
+    font-size: 20px;
+}
+
+.WE_Section form div {
+    padding-bottom: 8px
+}
+
+.WE_Section form div input {
+    width: 50%
+}
+
+.WE_Section form div input.btn {
+    width: 12%
+}
+
+.WE_FormField input {
+    margin-bottom: 8px;
+}
+
+
 /* Tree Input */
 
 div#tree-container {

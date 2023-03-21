@@ -29,27 +29,61 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="Simulator">Simulator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="BruteForceTesting">Brute Force Calculation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item navusername">
+                            <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Settings">@currentUser.UserName</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                    }
+
+                    <!--<li class="nav-item">
+                        <a class="nav-link navLink" asp-area="" asp-controller="EmailTemplates" asp-action="Index">DEBUG email templates</a>
+                    </li>-->
+                </ul>
                 <div class="float-end">
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Settings">Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Main">Account</a>
+                                <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Settings">Account</a>
                             </li>
                             @if (SignInManager.IsSignedIn(User))
                             {
                             <li class="nav-item">
-                                <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Main">Level @currentUser.Level : @currentUser.Experience/@currentUser.ToNextLevel</a>
+                                    <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Settings">Level @currentUser.Level : <span id="we_currentxp">@currentUser.Experience</span>/<span id="we_toxp">@currentUser.ToNextLevel</span></a>
                             </li>
                             }
                         </ul>
                     </div>
                 </div>
+
             </div>
         </nav>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3 navContent2">
+        <!--<nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3 navContent2">
             <div class="container-fluid">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
@@ -82,14 +116,10 @@
                                 <a class="nav-link navLink" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                         </li>
                         }
-
-                        <!--<li class="nav-item">
-                            <a class="nav-link navLink" asp-area="" asp-controller="EmailTemplates" asp-action="Index">DEBUG email templates</a>
-                        </li>-->
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav>-->
     </header>
 
     <div class="container mainContent">
@@ -99,11 +129,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted footerContent">
+    <!--<footer class="border-top footer text-muted footerContent">
         <div class="container">
             &copy; 2022 - WatchfulEye
         </div>
-    </footer>
+    </footer>-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

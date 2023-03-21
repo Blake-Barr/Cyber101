@@ -6,13 +6,16 @@
     var content = Model.simulatorLevelContent;
     var level = Model.simulatorLevel;
 }
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script src="~/js/brute.js"></script>
 <script src="~/js/ciphers.js"></script>
 <script src="~/js/simulator.js"></script>
 
 <h1 id="lvlName">@content.LevelTitle</h1>
 
-<div id="lvlDesc" class="WE_Section WE_BruteForce">
+<div id="errorBox" style="display: none;"><h1>Error!</h1><p></p></div>
+
+<div id="lvlDesc" class="WE_BruteForce">
     <p>@content.LevelDescription</p>
 </div>
 
@@ -20,9 +23,7 @@
     @Html.Raw(content.RenderLevel())
 </div>
 
-<div class="WE_Section">
-    <a class="nav-link navLink" id="completionButton" href="javascript:callCheck();"> Complete </a>
-</div>
+<a class="WE_NextLevel nav-link navLink" id="completionButton" href="javascript:callCheck();">Next Level <i class='fas fa-angle-right'></i></a>
 
 
 

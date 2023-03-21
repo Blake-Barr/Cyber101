@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="WE_Section">
+    <div id="LevelInfo">
+        <img src="~/images/WE_Logo.png" width="10%" /><br />
+        <b>Congratulations!</b><br /><br />
+
+        <p>You have completed a level and have earned <b>10 XP</b>. Keep playing to earn more!</p>
+
+        <p>Or, check out your standing on the <a>Leaderboard</a>.</p><br />
+    </div>
+
+    <div id="WE_LevelProgressBar">
+        <div class="WE_LevelBorder">
+            <div class="WE_LevelProgress" style="float:left;">Level XP</div>
+            <p style="float:right; margin-top: 8px; padding-right: 5px;">To Next Level</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    animateXPgain();
+    function animateXPgain()  {
+        var queryString = window.location.search;
+
+        var urlParams = new URLSearchParams(queryString);
+
+        var bar = $('#WE_LevelProgress');
+
+        var toxp = parseInt($("#we_toxp").text());
+        var orig = parseInt(urlParams.get('xp'));
+        var origtoxp = parseInt(urlParams.get('toxp'));
+        var newxp = parseInt($('#we_currentxp').text());
+
+        if (toxp == origtoxp) var initialXPWidthCalc = (orig / toxp) * 100; else var initialXPWidthCalc = (orig / origtoxp) * 100;
+
+        $(".WE_LevelProgress").css("width", initialXPWidthCalc + "%");
+        if (toxp == origtoxp) $(".WE_LevelProgress").text(orig + "/" + toxp); else $(".WE_LevelProgress").text(orig + "/" + origtoxp);
+
+        var diff = newxp - orig;
+
+        console.log(diff);
+        if(diff < 0)    {
+            diff = origtoxp - orig;
+        }
+        
+        setTimeout(() => {
+            animationLoop(toxp, orig, newxp, origtoxp, diff);
+        }, 2000);
+
+    }
+
+    var i = 0;
+
+    function animationLoop(toxp, orig, newxp, origtoxp, diff)    {
+        setTimeout(() => {
+            orig++;
+            if (toxp == origtoxp) var initialXPWidthCalc = (orig / toxp) * 100; else var initialXPWidthCalc = (orig / origtoxp) * 100;
+            $(".WE_LevelProgress").css("width", initialXPWidthCalc + "%");
+            if (toxp == origtoxp) $(".WE_LevelProgress").text(orig + "/" + toxp); else $(".WE_LevelProgress").text(orig + "/" + origtoxp);
+            i++;
+            if(orig == origtoxp)    {
+                $(".WE_LevelProgress").css("width", "0%");
+                $(".WE_LevelProgress").text(0 + "/" + $("#we_toxp").text());
+            }
+            if (i < diff) { animationLoop(toxp, orig, newxp, origtoxp,diff); }
+        }, 40);
+    }
+</script>

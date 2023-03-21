@@ -79,7 +79,7 @@ namespace WatchfulEye.Controllers
                 }
                 else
                 {
-                    if (lvl > 3)
+                    if (lvl > 2)
                     {
                         Random rnd = new Random();
                         var num = rnd.Next(0, 10);
@@ -219,6 +219,22 @@ namespace WatchfulEye.Controllers
             }
 
             return View();
+        }
+
+        public IActionResult LevelComplete()
+        {
+            return View();
+        }
+
+        public IActionResult Leaderboard()
+        {
+            var list = db.Users.ToList();
+
+            var orderedlist = from user in list
+                   orderby user.Level descending
+                   select user;
+
+            return View(orderedlist);
         }
     }
 }

@@ -5,8 +5,8 @@ var unit = "";
 let result = { timeValue: '', unitValue: '', level: 0 }
 function setupBruteForce() {
     input = document.getElementById('BFInput');
-    time = document.getElementById('bf_Result');
-    unit = document.getElementById('bf_Unit');
+    time = document.getElementById('num');
+    unit = document.getElementById('units');
 
     result = { timeValue: '', unitValue: '', level: 0 }
 

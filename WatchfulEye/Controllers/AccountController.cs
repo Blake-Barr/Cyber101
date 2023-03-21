@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 using WatchfulEye.Data;
 using WatchfulEye.Models;
 using WatchfulEye.ViewModels;
@@ -89,14 +90,97 @@ namespace WatchfulEye.Controllers
 
             if (newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+            else
+            {
+                if (!newUserResponse.Succeeded)
+                {
+                    foreach (var err in newUserResponse.Errors)
+                    {
+                        TempData["Error"] += err.Description + " <br />";   
+                    }
+
+                    return View(registerViewModel);
+                }
+                
+            }
+                
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Settings(EditLoginViewModel registerViewModel)
+        {
+            if (!ModelState.IsValid) return View(registerViewModel);
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                    if (registerViewModel.NewPassword != null)
+                    {
+                        var passwordCheck = await _userManager.CheckPasswordAsync(user, registerViewModel.Password);
+
+                            if (passwordCheck)
+                            {
+
+                            var result = await _userManager.ChangePasswordAsync(user, registerViewModel.Password, registerViewModel.NewPassword);
+
+                            if (!result.Succeeded)
+                            {
+                                foreach (var err in result.Errors)
+                                {
+                                    TempData["Error"] += err.Description + " <br />";
+                                }
+
+                                return View(registerViewModel);
+                            }
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Please enter the correct password for your account.";
+                        return View(registerViewModel);
+                    }
+
+
+                }
+                if (registerViewModel.Username != null)
+                {
+                    user.UserName = registerViewModel.Username;
+                }
+                IdentityResult res = await _userManager.UpdateAsync(user);
+
+                if(!res.Succeeded)
+                {
+                    foreach (var err in res.Errors)
+                    {
+                        TempData["Error"] += err.Description + " <br />";
+                    }
+
+                    return View(registerViewModel);
+                }
+            }
+            return RedirectToAction("Settings", "Account");
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Deactivate()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            await _signInManager.SignOutAsync();
+            if (user != null)
+            {
+                var res = _userManager.DeleteAsync(user);
+                //IdentityResult resp = await _userManager.UpdateAsync(user);
+            }
+
             return RedirectToAction("Index", "Home");
         }
     }

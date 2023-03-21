@@ -40,21 +40,25 @@ function checkForCompletion(data) {
             console.log(data);
             var answers = getQuizAnswers();
             data.answers = answers;
-            $.ajax({
-                type: "POST",
-                url: 'https://localhost:7128/WatchfulEye/CheckCompletion/',
-                data: data,
-                success: function (resultData) {
-                    console.log(resultData);
-                    if (resultData.completed) {
-                        navigateUserToCompletionPage();
-                    } else {
-                        displayIncorrects(resultData.incorrectList);
+            if (answers != false) {
+                $.ajax({
+                    type: "POST",
+                    url: 'https://localhost:7128/WatchfulEye/CheckCompletion/',
+                    data: data,
+                    success: function (resultData) {
+                        console.log(resultData);
+                        if (resultData.completed) {
+                            navigateUserToCompletionPage();
+                        } else {
+                            displayIncorrects(resultData.incorrectList);
+                        }
                     }
-                }
-                //},
-                //dataType: dataType
-            });
+                    //},
+                    //dataType: dataType
+                });
+            } else {
+                displayError('Please answer all questions!');
+            }
             break;
         case 1:
             console.log(data);
@@ -69,7 +73,7 @@ function checkForCompletion(data) {
                     if (resultData.completed) {
                         navigateUserToCompletionPage();
                     } else {
-                        console.log("not all clicked");
+
                     }
                 }
                 //},
@@ -78,19 +82,23 @@ function checkForCompletion(data) {
             break;
         case 2:
             var selectedTemp = $('.templates input:checked').val();
-            console.log(selectedTemp);
             data.template = selectedTemp;
             data.email = $('#email_body #targetEmail').val();
-            $.ajax({
-                type: "POST",
-                url: 'https://localhost:7128/WatchfulEye/CheckCompletion/',
-                data: data,
-                success: function (resultData) {
-                    navigateUserToCompletionPage();
-                }
-                //},
-                //dataType: dataType
-            });
+            data.name = $('#email_body #targetName').val();
+            if (data.email != "" && data.name != "" && data.template != null) {
+                $.ajax({
+                    type: "POST",
+                    url: 'https://localhost:7128/WatchfulEye/CheckCompletion/',
+                    data: data,
+                    success: function (resultData) {
+                        navigateUserToCompletionPage();
+                    }
+                    //},
+                    //dataType: dataType
+                });
+            } else {
+                displayError("Please fill out both fields, and choose a template.");
+            }
             break;
         case 3:
             var cipheredText = $('#encryptedInput').text();
@@ -112,7 +120,7 @@ function checkForCompletion(data) {
             console.log(encWord);
             break;
         case 4:
-            var expectedHTML = $('#injectGoal p').html();
+            var expectedHTML = $('#inject_goal').html();
             var inputHTML = $('#inject_output').html();
 
             if (expectedHTML == inputHTML) {
@@ -158,22 +166,38 @@ function getQuizAnswers() {
             }
         }
     }
+
+    if (inputs.length != answers.length)  {
+        return false;
+    }
     return answers;
 }
 
 function displayIncorrects(mismatches) {
     var questions = $('#quiz_body .question');
-    for (var i = 0; i < questions.length; i++) {
-        if (mismatches[i] == "0") {
-            questions[i].querySelector('p').innerHTML = 'nope';
+    questions.each(function (ind) {
+        if (mismatches[ind] == "0") {
+            if (!$(this).find('i').length) {
+                var ansid = $(this).find('input:checked').attr('id');
+                $(this).find('label#' + ansid + 'l').after('<i class="fas fa-times"></i>');
+                $(this).find('label#' + ansid + 'l').addClass('WE_Incorrect');
+            } 
+        } else {
+            if (!$(this).find('i').length) {
+                var ansid = $(this).find('input:checked').attr('id');
+                $(this).find('label#' + ansid + 'l').after('<i class="fas fa-check"></i>');
+                $(this).find('label#' + ansid + 'l').addClass('WE_Correct');
+            } 
         }
-    }
+    });
 }
 
 function navigateUserToCompletionPage() {
     //Disable button
     $('#completionButton').disabled = true;
-    window.location.href = "/Home/Index";
+    var oldXP = $("#we_currentxp").text();
+    var oldtoXP = $("#we_toxp").text();
+    window.location.href = "/WatchfulEye/LevelComplete?xp=" + oldXP + "&toxp=" + oldtoXP;
 }
 
 function setup_SpotGame(data) {
@@ -238,7 +262,9 @@ function setup_CipherGame(data) {
     switch (cipherType) {
         case 0:
             $('#cypherType').text('Caesar Cipher');
+            $('#cypherDesc').text('Caesar Ciphers are a simple encryption method performed by taking an alphabetical character and shifting the letter forwards by a certain amount. For example, encrypting the term \'hat\' with a shift of 3 (a \'shift\' refers to how many characters to move backwards) would return the value \'kdw\'. In this example, the shift will be 2 characters.')
             $('#cypherType').attr('data-type', 0);
+            break;
     }
 
     for (var i = 0; i < words.length; i++) {
@@ -265,6 +291,16 @@ function encryptInput() {
         }
 
         $('#encryptedInput').html(cipheredText);
+
+        var cipheredText = $('#encryptedInput').text();
+        var encWord = $('#encryptedWord').text();
+
+        if (cipheredText == encWord) {
+            $('#encryptedInput').addClass("WE_Correct");
+            $('#encryptedWord').addClass("WE_Correct");
+        } else {
+            $('#encryptedInput').addClass("WE_Incorrect");
+        }
     }
 }
 
@@ -276,4 +312,19 @@ function injectText() {
     var input = $("#injectBox").val();
 
     $('#inject_output').html(input);
+
+    var injinput = $('#inject_goal').html();
+    var injoutput = $('#inject_output').html();
+
+    if (injinput == injoutput) {
+        $('#injectGoal').addClass("WE_Correct");
+        $('#injectoutput').addClass("WE_Correct");
+    } else {
+        $('#injectoutput').addClass("WE_Incorrect");
+    }
+}
+
+function displayError(message) {
+    $('#errorBox').css("display","block");
+    $('#errorBox p').text(message);
 }

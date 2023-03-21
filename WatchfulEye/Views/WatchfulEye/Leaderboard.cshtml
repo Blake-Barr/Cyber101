@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<WatchfulEye.Models.AppUser>
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@{
+    ViewData["Title"] = "Leaderboard";
+}
+
+
+
+<h1>Leaderboard</h1>
+<div class="WE_Section">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Rank
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Level)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Experience)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var index = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @index
+                        @{index++;}
+                    </td>
+                    <td class="UserNameTD">
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Experience)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+@if (SignInManager.IsSignedIn(User))
+{
+<script>
+
+    $(document).ready(function() {
+        $('.UserNameTD:contains(' + $(".navusername a").text() + ')').css('font-weight', 'bold');
+        });
+
+</script>
+}
