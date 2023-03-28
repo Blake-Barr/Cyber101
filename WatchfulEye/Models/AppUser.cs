@@ -8,7 +8,7 @@ namespace WatchfulEye.Models
 
         private int _experience = 0;
 
-        private int _toNextLevel = 10;
+        private int _toNextLevel = 20;
 
         private int _currentLevel = 1;
 

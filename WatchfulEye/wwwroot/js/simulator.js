@@ -73,7 +73,7 @@ function checkForCompletion(data) {
                     if (resultData.completed) {
                         navigateUserToCompletionPage();
                     } else {
-
+                        displayError('You have not found all the clues! Keep searching!');
                     }
                 }
                 //},
@@ -115,7 +115,7 @@ function checkForCompletion(data) {
                     //},
                     //dataType: dataType
                 });
-            }
+            } else { displayError('The ciphered word does not match the target!'); }
             console.log(cipheredText);
             console.log(encWord);
             break;
@@ -138,7 +138,19 @@ function checkForCompletion(data) {
             break;
         case 5:
             var res = returnResult();
-            if (res.level > 1) {
+            var win = false;
+            switch ($('#brute_body #level').text()) {
+                case "1": {
+                    if (parseInt(res.timeValue) > 1 && res.unitValue == "years") win = true; break;
+                }
+                case "2": {
+                    if (parseInt(res.timeValue) > 3 && parseInt(res.timeValue) < 20 && res.unitValue == "years") win = true; break;
+                }
+                case "3": {
+                    if (parseInt(res.timeValue) > 100 && res.unitValue == "years") win = true; break;
+                }
+            }
+            if (win) {
                 $.ajax({
                     type: "POST",
                     url: 'https://localhost:7128/WatchfulEye/CheckCompletion/',
@@ -149,6 +161,8 @@ function checkForCompletion(data) {
                     //},
                     //dataType: dataType
                 });
+            } else {
+                displayError('This password does not meet the specified target duration!');
             }
             break;
     }
@@ -208,14 +222,34 @@ function setup_SpotGame(data) {
         var spotCounterText = document.createElement("p");
         spotCounter.id = "spot_counter";
         spotCounterText.classList.add("spotcounter");
-        spotCounterText.innerText = "0/" + spotObjects.length;
+        spotCounterText.innerText = "Issues found: 0/" + spotObjects.length;
         spotCounter.append(spotCounterText);
-        $("#lvlInteractive").append(spotCounter);
+        $("#spot_body").prepend(spotCounter);
 
         spotObjects.each(function () {
             $(this).click(function () {
+                var spotid = $(this).attr('id');
+                var coords = $(this).attr("coords");
+                console.log(coords);
+                var polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+                $('#spot_body svg').append(polygon);
+
+                var coordArray = coords.split(' ');
+                for (coord of coordArray) {
+                    var point = document.querySelector('#spot_body svg').createSVGPoint();
+                    var coordsSeparated = coord.split(',');
+                    point.x = coordsSeparated[0];
+                    point.y = coordsSeparated[1];
+                    polygon.points.appendItem(point);
+                }
+                //var polyg = '<polygon points="' + coords + '" fill="#CECECE" opacity="0.9" stroke="#000000" stroke-width="2"></polygon>';
+                //$('#spot_body svg').append(polyg);
                 $(this).addClass("clicked");
                 updateCounter(spotObjects.length);
+
+                $(".spot_clues").css("display", "block");
+                $("#" + spotid + "l").css("display", "block");
+
             });
         });
     }
@@ -224,7 +258,7 @@ function setup_SpotGame(data) {
 }
 
 function updateCounter(length) {
-    $("#spot_counter .spotcounter").text($("#spot_body .spot_item.clicked").length + "/" + length);
+    $("#spot_counter .spotcounter").text("Issues found: " + $("#spot_body .spot_item.clicked").length + "/" + length);
 }
 
 function setup_EmailSend(data) {
@@ -265,6 +299,16 @@ function setup_CipherGame(data) {
             $('#cypherDesc').text('Caesar Ciphers are a simple encryption method performed by taking an alphabetical character and shifting the letter forwards by a certain amount. For example, encrypting the term \'hat\' with a shift of 3 (a \'shift\' refers to how many characters to move backwards) would return the value \'kdw\'. In this example, the shift will be 2 characters.')
             $('#cypherType').attr('data-type', 0);
             break;
+        case 1:
+            $('#cypherType').text('Hexidecimal');
+            $('#cypherDesc').text('Hexidecimal or base-16 is a numeral system that uses 16 characters to represent numbers. This form of encoding is popular as it transforms special characters like a slash (/), into something more digestable for communication between devices (becoming 2F).')
+            $('#cypherType').attr('data-type', 1);
+            break;
+        case 2:
+            $('#cypherType').text('Base64');
+            $('#cypherDesc').text('Base64 is an encryption method that can be used to encode data that is to be transferred through a protocol. It retains important characters, and prevents strings of characters from alteration while encoded.')
+            $('#cypherType').attr('data-type', 2);
+            break;
     }
 
     for (var i = 0; i < words.length; i++) {
@@ -287,6 +331,12 @@ function encryptInput() {
         switch (cipherType) {
             case "0":
                 cipheredText = caesarCipher(input, 2);
+                break;
+            case "1":
+                cipheredText = hexCipher(input);
+                break;
+            case "2":
+                cipheredText = base64Cipher(input);
                 break;
         }
 

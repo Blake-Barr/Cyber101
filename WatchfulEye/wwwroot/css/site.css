@@ -172,6 +172,11 @@ main    {
     border-top: 1px solid black;
 }
 
+#email_body img {
+    max-width: 550px;
+    margin-top: 15px;
+}
+
 #cypherType {
     font-size: 30px;
     font-weight: bold;
@@ -268,6 +273,63 @@ main    {
     text-align: center;
     padding-bottom: 20px;
     
+}
+
+#spot_body img {
+   border: 1px solid black;
+}
+
+#spot_body {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#spot_body area:hover    {
+    cursor: default;
+}
+
+#spot_body area.spot_item.clicked {
+    cursor: default;
+}
+
+#spot_body area.spot_item {
+    cursor: default;
+}
+
+#spot_body .stack_imgsvg    {
+    display: grid;
+}
+
+.spot_clues {
+    background-color: lightpink;
+    border: 1px solid black;
+    border-top: 0px;
+    padding: 5px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.spot_clues p {
+    font-size: 14px;
+    padding-left: 5px;
+    margin-bottom: 0;
+    display: none
+}
+
+.spot_clues p span {
+    font-weight: bold;
+}
+.row1, .row2, .row3    {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#spot_counter   {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 .WE_LevelBorder {

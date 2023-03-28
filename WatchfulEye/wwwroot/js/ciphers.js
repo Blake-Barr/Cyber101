@@ -19,3 +19,18 @@ function caesarCipher(input, num) {
     }
     return result;
 }
+
+ function hexCipher(str) {
+
+    var result = "";
+    for (var i = 0; i < str.length; i++) {
+        hex = str.charCodeAt(i).toString(16);
+        result += hex + ' ';
+    }
+
+     return result;
+}
+
+function base64Cipher(str) {
+    return btoa(str);
+}
