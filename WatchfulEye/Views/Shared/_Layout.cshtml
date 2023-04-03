@@ -34,13 +34,16 @@
                         <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="Simulator">Simulator</a>
+                        <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="Simulator">Play</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="BruteForceTesting">Brute Force Calculation</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="Leaderboard">Leaderboard</a>
                     </li>
                     @if (SignInManager.IsSignedIn(User))
                     {

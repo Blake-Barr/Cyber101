@@ -3,13 +3,26 @@
     ViewData["Title"] = "BruteForceTesting";
 }
 
-
+<script src="~/js/brute.js"></script>
+<script>
+    $(document).ready(function()    {
+        setupBruteForce();
+    });
+    </script>
 
 <!--   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>  -->
 
 <h1>Brute Force Calculator</h1>
 
 <div id="WE_BruteForceSection" class="WE_Section WE_BruteForce">
+    <div style="padding-top: 30px;"id="brute_body">
+        <!--<label for="BFInput">Password</label>-->
+        <div style="text-align: center;"><input style="width: 75%;" placeholder="Enter text here..." type="text" id="BFInput" name="BFInput"></div><br>
+
+        <div id="results">
+            Estimated time to Crack: <p id="bf_Result"><span id="num">Please enter a value.</span> <span id="units"></span></p>
+        </div>
+    </div>
     <p>
         Brute Force Attacks are a common form of cyber attack. A hacker will will attempt to guess your password using an algorithm that will iterate through as many combinations
         as possible with the goal of eventually getting access to your account.
@@ -69,14 +82,4 @@
             Botnets: A brute force attack is a numbers game, and it takes a lot of computing power to execute at scale.
         </li>
     </ul>
-</div>
-
-
-<div class="input-container">
-   <link rel="stylesheet" type="text/css" href="~/css/Brute.css" />
-    <h5 class="title">Brute Force Attack Time (no spaces) <Estimation</h5> 
-    <br />
-    <input type="text" id="input" maxlength="18" placeholder="Enter Password" spellcheck="false">
-    <small>Time to hack: <span id="time" class="fade-in"></span> <span id="unit" class="fade-in"></span></small>
-    <script type="text/javascript" src="~/info/script.js"></script>
 </div>

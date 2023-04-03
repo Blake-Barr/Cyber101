@@ -15,9 +15,9 @@
     </div>
 
     <div id="WE_LevelProgressBar">
-        <div class="WE_LevelBorder">
-            <div class="WE_LevelProgress" style="float:left;">Level XP</div>
-            <p style="float:right; margin-top: 8px; padding-right: 5px;">To Next Level</p>
+        <div style="display:grid;" class="WE_LevelBorder">
+            <div style="grid-column: 1; grid-row: 1;" class="WE_LevelProgress" style="float:left;">Level XP</div>
+            <div style="grid-column: 1; grid-row: 1;"><p class="WE_Tnl" style="float:right; margin-top: 8px; padding-right: 5px;">To Next Level</p></div>
         </div>
     </div>
 </div>
@@ -64,8 +64,10 @@
             if (toxp == origtoxp) $(".WE_LevelProgress").text(orig + "/" + toxp); else $(".WE_LevelProgress").text(orig + "/" + origtoxp);
             i++;
             if(orig == origtoxp)    {
-                $(".WE_LevelProgress").css("width", "0%");
-                $(".WE_LevelProgress").text(0 + "/" + $("#we_toxp").text());
+                $(".WE_LevelProgress").text("Level Up!");
+                $(".WE_LevelProgress").css("text-align", "center");
+                $(".WE_Tnl").css("color", "lawngreen");
+                //$(".WE_LevelProgress").text(0 + "/" + $("#we_toxp").text());
             }
             if (i < diff) { animationLoop(toxp, orig, newxp, origtoxp,diff); }
         }, 40);

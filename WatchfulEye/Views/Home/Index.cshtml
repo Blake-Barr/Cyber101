@@ -2,6 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .WE_Section ul li {
+        background-color: #26408B;
+        padding: 5px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin-bottom: 5px;
+        border: 1px solid black;
+        font-size: 20px;
+    }
+</style>
 <h1 class="display-4 text-center">Welcome to WatchfulEye</h1>
 
 <div class="WE_Container">
@@ -12,6 +23,18 @@
             is inevitable that your information will be targeted in a cyberattack. In this situation, it is important to minimize the risk of this attack successfully 
             collecting information that you would rather keep out of the hands of malicious use.
         </p>
+
+        <ul style="list-style-type: none; padding: 5px;">
+            <li>
+                <a style="color: white;"class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="Simulator">Cybersecurity Games</a>
+            </li>
+            <li>
+                <a style="color: white;" class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="BruteForceTesting">Brute Force Calculation</a>
+            </li>
+            <li>
+                <a style="color: white;" class="nav-link navLink" asp-area="" asp-controller="WatchfulEye" asp-action="Leaderboard">Leaderboard</a>
+            </li>
+        </ul>
     </div>
 
 </div>

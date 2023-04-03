@@ -11,7 +11,7 @@ namespace WatchfulEye.Data
         public static async Task Initialize(WatchfulEyeContext cx, IApplicationBuilder app, IServiceScope scope)
         {
 
-            cx.Database.EnsureDeleted();
+            //cx.Database.EnsureDeleted();
 
             //cx.Database.Migrate();
 
@@ -95,7 +95,7 @@ namespace WatchfulEye.Data
                 new SimulatorLevelContent{GameType = 5, HTMLContent = "<div id=\"brute_body\">\r\n    <div id=\"level\" style=\"display: none;\">1</div>\r\n    <p id=\"req\">Create a password that will take a brute force algorithm <b>more than 1 year</b> to crack.</p>\r\n\r\n    <label for=\"BFInput\">Password</label>\r\n    <input type=\"text\" id=\"BFInput\" name=\"BFInput\"><br>\r\n\r\n    <div id=\"results\">\r\n        Estimated time to Crack: <p id=\"bf_Result\"><span id=\"num\">Please enter a value.</span> <span id=\"units\"></span></p>\r\n    </div>\r\n</div>", LevelDescription=" "
                 , LevelTitle="Brute Force Game", TutorialLevel = 0},
 
-                new SimulatorLevelContent{GameType = 5, HTMLContent = "<div id=\"brute_body\">\r\n    <div id=\"level\" style=\"display: none;\">2</div>\r\n    <p id=\"req\">Create a password that will take a brute force algorithm <b>between 3 to 10 years</b> to crack.</p>\r\n\r\n    <label for=\"BFInput\">Password</label>\r\n    <input type=\"text\" id=\"BFInput\" name=\"BFInput\"><br>\r\n\r\n    <div id=\"results\">\r\n        Estimated time to Crack: <p id=\"bf_Result\"><span id=\"num\">Please enter a value.</span> <span id=\"units\"></span></p>\r\n    </div>\r\n</div>", LevelDescription=" "
+                new SimulatorLevelContent{GameType = 5, HTMLContent = "<div id=\"brute_body\">\r\n    <div id=\"level\" style=\"display: none;\">2</div>\r\n    <p id=\"req\">Create a password that will take a brute force algorithm <b>between 3 to 20 years</b> to crack.</p>\r\n\r\n    <label for=\"BFInput\">Password</label>\r\n    <input type=\"text\" id=\"BFInput\" name=\"BFInput\"><br>\r\n\r\n    <div id=\"results\">\r\n        Estimated time to Crack: <p id=\"bf_Result\"><span id=\"num\">Please enter a value.</span> <span id=\"units\"></span></p>\r\n    </div>\r\n</div>", LevelDescription=" "
                 , LevelTitle="Brute Force Game", TutorialLevel = 0},
 
                 new SimulatorLevelContent{GameType = 5, HTMLContent = "<div id=\"brute_body\">\r\n    <div id=\"level\" style=\"display: none;\">3</div>\r\n    <p id=\"req\">Create a password that will take a brute force algorithm <b>More than 100 years</b> to crack.</p>\r\n\r\n    <label for=\"BFInput\">Password</label>\r\n    <input type=\"text\" id=\"BFInput\" name=\"BFInput\"><br>\r\n\r\n    <div id=\"results\">\r\n        Estimated time to Crack: <p id=\"bf_Result\"><span id=\"num\">Please enter a value.</span> <span id=\"units\"></span></p>\r\n    </div>\r\n</div>", LevelDescription=" "

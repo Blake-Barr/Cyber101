@@ -84,7 +84,11 @@ namespace WatchfulEye.Controllers
                         Random rnd = new Random();
                         var num = rnd.Next(0, 10);
                         // test value
-                        num = 3;
+                        // num = 3;
+
+                        if (lvl == 3) num = 1;
+                        if (lvl == 4) num = 3;
+                        if (lvl == 5) num = 2;
 
                         var simLevel = new SimulatorLevel(lvl);
                         SimulatorLevelContent[] contents = db.simContent.Where(b => b.GameType == num).ToArray();
