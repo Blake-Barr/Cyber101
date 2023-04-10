@@ -296,7 +296,7 @@ function setup_CipherGame(data) {
     switch (cipherType) {
         case 0:
             $('#cypherType').text('Caesar Cipher');
-            $('#cypherDesc').text('Caesar Ciphers are a simple encryption method performed by taking an alphabetical character and shifting the letter forwards by a certain amount. For example, encrypting the term \'hat\' with a shift of 3 (a \'shift\' refers to how many characters to move backwards) would return the value \'kdw\'. In this example, the shift will be 2 characters.')
+            $('#cypherDesc').text('Caesar Ciphers are a simple encoding method performed by taking an alphabetical character and shifting the letter forwards by a certain amount. For example, encoding the term \'hat\' with a shift of 3 (a \'shift\' refers to how many characters to move backwards) would return the value \'kdw\'. In this example, the shift will be 2 characters.')
             $('#cypherType').attr('data-type', 0);
             break;
         case 1:
@@ -306,7 +306,7 @@ function setup_CipherGame(data) {
             break;
         case 2:
             $('#cypherType').text('Base64');
-            $('#cypherDesc').text('Base64 is an encryption method that can be used to encode data that is to be transferred through a protocol. It retains important characters, and prevents strings of characters from alteration while encoded.')
+            $('#cypherDesc').text('Base64 is a method that can be used to encode data that is to be transferred through a protocol. It retains important characters, and prevents strings of characters from alteration while encoded.')
             $('#cypherType').attr('data-type', 2);
             break;
     }
