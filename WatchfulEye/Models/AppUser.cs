@@ -22,6 +22,8 @@ namespace WatchfulEye.Models
 
         public int? AssignedLevelId { get; set; }
 
+        public int? LastLevelType { get; set; }
+
         public int Level { get { return _level; } set { _level = value; } }
 
         public int Experience { get { return _experience; } set { _experience = value; } }

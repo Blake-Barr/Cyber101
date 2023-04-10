@@ -62,7 +62,7 @@ namespace WatchfulEye.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Simulator()
+        public async Task<IActionResult> Simulator(bool skip = false)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
@@ -82,19 +82,30 @@ namespace WatchfulEye.Controllers
                     if (lvl > 2)
                     {
                         Random rnd = new Random();
-                        var num = rnd.Next(0, 10);
+
+                        var num = rnd.Next(0, 5);
+
+                        while (num == currentUser.LastLevelType)
+                        {
+                            num = rnd.Next(0, 5);
+                        }
+
                         // test value
                         // num = 3;
 
-                        if (lvl == 3) num = 1;
-                        if (lvl == 4) num = 3;
-                        if (lvl == 5) num = 2;
+                        if(!skip)
+                        {
+                            if (lvl == 3) num = 1;
+                            if (lvl == 4) num = 3;
+                            if (lvl == 5) num = 2;
+                        }
 
                         var simLevel = new SimulatorLevel(lvl);
                         SimulatorLevelContent[] contents = db.simContent.Where(b => b.GameType == num).ToArray();
                         SimulatorLevelContent randomRes = contents[rnd.Next(0, contents.Length)];
                         currentUser.AssignedLevel = simLevel;
                         simLevel.SLC = randomRes;
+                        currentUser.LastLevelType = simLevel.SLC.GameType;
                         IdentityResult res = await _userManager.UpdateAsync(currentUser);
 
                         return View(new SimulatorLevelViewModel(simLevel, simLevel.SLC));
@@ -105,6 +116,7 @@ namespace WatchfulEye.Controllers
                         SimulatorLevelContent simLevelContent = db.simContent.Where(b => b.TutorialLevel == lvl).FirstOrDefault();
                         simLevel.SLC = simLevelContent;
                         currentUser.AssignedLevel = simLevel;
+                        currentUser.LastLevelType = simLevel.SLC.GameType;
                         IdentityResult res = await _userManager.UpdateAsync(currentUser);
                         return View(new SimulatorLevelViewModel(simLevel, simLevel.SLC));
                     }
@@ -240,5 +252,37 @@ namespace WatchfulEye.Controllers
 
             return View(orderedlist);
         }
+
+        public async Task<IActionResult> ResetProgress()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            currentUser.Level = 1;
+            currentUser.Experience = 0;
+            currentUser.ToNextLevel = 20;
+            currentUser.AssignedLevel = null;
+            currentUser.AssignedLevelId = null;
+            currentUser.CurrentCompletedLevel = 1;
+
+            IdentityResult res = await _userManager.UpdateAsync(currentUser);
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> SkipLevel()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            currentUser.AssignedLevelId = null;
+
+            IdentityResult res = await _userManager.UpdateAsync(currentUser);
+
+            db.SaveChanges();
+
+            return RedirectToAction("Simulator", "WatchfulEye", new { skip = true });
+        }
+
     }
 }

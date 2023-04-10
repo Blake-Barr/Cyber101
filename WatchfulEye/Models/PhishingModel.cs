@@ -12,7 +12,7 @@ namespace WatchfulEye.Models
         **/
         public void sendEmail(EmailTemplate e, string address, string name, string id)
         {
-            var smtpClient = new SmtpClient("smtp.outlook.com")
+            var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
                 Credentials = new NetworkCredential("", ""),
